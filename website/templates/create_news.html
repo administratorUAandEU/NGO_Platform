@@ -41,13 +41,14 @@
                     <option value="{{ tag.name }}">{{ tag.name }}</option>
                     {% endfor %}
                 </select>
+                <small class="text-muted">Hold Ctrl (or Cmd on Mac) to select multiple tags.</small>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Upload Image</label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
             </div>
             <button type="submit" class="btn btn-success mb-4">Create News</button>
-            <a href="{{ url_for('news.load_news') }}" class="btn btn-secondary mb-4">Cancel</a>
+            <a href="{{ url_for('admin.manage_news') }}" class="btn btn-secondary mb-4">Cancel</a>
         </form>
     </div>
 

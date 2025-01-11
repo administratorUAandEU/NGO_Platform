@@ -12,22 +12,26 @@
 <body>
     {% include 'navbar.html' %}
 
-    <div class="container mt-4">
-        <h1>All News Articles</h1>
-        <div class="list-group">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">All News</h1>
+        <div class="row">
             {% for article in news_articles %}
-            <div class="news-article">
-                <h2>{{ article.name }}</h2>
-                <p><strong>Location:</strong> {{ article.location }}</p>
-                <p><strong>Date:</strong> {{ article.date }}</p>
-                <p>{{ article.description }}</p>
-                {% if article.image_exists %}
-                <img src="{{ url_for('static', filename=article.image_path) }}" alt="News Image" class="img-fluid">
-                {% endif %}
-                {% if article.link %}
-                <p><a href="{{ article.link }}" target="_blank">Read more</a></p>
-                {% endif %}
-                <p><strong>Tags:</strong> {{ article.tags | join(', ') }}</p>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    {% if article.image_exists %}
+                    <img src="{{ url_for('static', filename=article.image_path) }}" alt="News Image" class="card-img-top">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.name }}</h5>
+                        <p class="card-text"><strong>Location:</strong> {{ article.location }}</p>
+                        <p class="card-text"><strong>Date:</strong> {{ article.date }}</p>
+                        <p class="card-text">{{ article.description[:150] }}...</p>
+                        {% if article.link %}
+                        <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Read More</a>
+                        {% endif %}
+                        <p class="card-text mt-2"><strong>Tags:</strong> {{ article.tags | join(', ') }}</p>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>

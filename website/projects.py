@@ -72,7 +72,7 @@ def create_project():
             db.session.commit()
 
         flash("Project created successfully!", category="success")
-        return redirect(url_for("projects.load_projects"))
+        return redirect(url_for('admin.manage_projects'))
 
     return render_template("create_project.html")
 
