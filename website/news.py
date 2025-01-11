@@ -22,7 +22,7 @@ def load_news():
 
     for article in news_articles:
         image_filename = article.image_path
-        image_path = os.path.join("website", "static", "uploads", image_filename)
+        image_path = os.path.join("website", "static", "uploads", image_filename) if image_filename else 'NaN'
         news_data.append({
             "id": article.id,
             "name": article.name,
@@ -87,7 +87,7 @@ def create_news():
                     db.session.commit()
 
             flash("News article created successfully!", category="success")
-            return redirect(url_for("news.load_news"))
+            return redirect(url_for('admin.manage_news'))
         except IntegrityError:
             db.session.rollback()
             flash("Error creating news article.", category="error")
