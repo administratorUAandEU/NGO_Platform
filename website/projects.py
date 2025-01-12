@@ -23,7 +23,7 @@ def load_projects():
     for project in _projects:
         image_filename = project.image_path
         image_path = os.path.join(
-            "website", "static", "uploads", image_filename)
+            "website", "static", "uploads", image_filename if image_filename else 'NaN')
         project_data.append({
             "id": project.id,
             "name": project.name,

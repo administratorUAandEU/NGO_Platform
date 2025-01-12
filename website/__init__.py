@@ -32,12 +32,14 @@ def create_app():
     from .about import about_us
     from .projects import projects
     from .admin import admin
+    from .search import search
 
     app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(news, url_prefix='/')
     app.register_blueprint(about_us, url_prefix='/')
     app.register_blueprint(projects, url_prefix='/')
     app.register_blueprint(admin, url_prefix='/')
+    app.register_blueprint(search, url_prefix="/")
 
     with app.app_context():
         create_database(app)
