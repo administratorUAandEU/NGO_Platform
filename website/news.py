@@ -1,10 +1,11 @@
 import os
-from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect, url_for
-from .models import db, News, NewsTag, NewsTaggingTable
+from flask import Blueprint, render_template, request, flash, abort, redirect, url_for
+from .models import db, News, NewsTag
 from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 from datetime import datetime
 
+UPLOAD_FOLDER = 'website/static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
@@ -95,3 +96,24 @@ def create_news():
 
     tags = NewsTag.query.all()
     return render_template("create_news.html", tags=tags)
+
+@news.route("/news/<int:project_id>", methods=["GET"])
+def view_project(project_id):
+    _news = News.query.get(project_id)
+    if not _news:
+        abort(404)
+
+    image_path = _news.image_path
+    news_data = {
+        "id": _news.id,
+        "name": _news.name,
+        "location": _news.location,
+        "date": _news.date,
+        "description": _news.description,
+        "link": _news.link,
+        "image_exists": os.path.exists(os.path.join(UPLOAD_FOLDER, image_path)) if image_path else False,
+        "image_path": f"uploads/{image_path}" if image_path else None,
+        "tags": _news.tags
+    }
+
+    return render_template("news_detail.html", news=news_data)

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container mt-5">
+        {% if query %}
+        <h1 class="mb-4">Search Results for "<span class="text-success">{{ query }}</span>"</h1>
+        {% else %}
+        <h1 class="mb-4">Search Results: <span class="text-success text-uppercase">all</span></h1>
+        {% endif %}
+
+        {% if results.news and results.projects %}
+        <nav class="mb-4 d-md-none">
+            <div class="btn-group w-100" role="group" aria-label="Section navigation">
+                <a class="btn btn-outline-success" href="#news-section">Go to News</a>
+                <a class="btn btn-outline-success" href="#projects-section">Go to Projects</a>
+            </div>
+        </nav>
+        {% endif %}
+
+        {% if results.news or results.projects %}
+        <div class="row">
+            {% if results.news %}
+            <div class="col-md-6" id="news-section">
+                <h2 class="mb-3">News</h2>
+                <ul class="list-group mb-5">
+                    {% for news in results.news %}
+                    <li class="list-group-item">
+                        <h5 class="fw-bold">{{ news.name }}</h5>
+                        <p class="text-muted small">{{ news.description }}</p>
+                        <a href="{{ url_for('news.load_news') }}/{{ news.id }}" class="btn btn-success btn-sm">Read More</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if results.projects %}
+            <div class="col-md-6" id="projects-section">
+                <h2 class="mb-3">Projects</h2>
+                <ul class="list-group mb-5">
+                    {% for project in results.projects %}
+                    <li class="list-group-item">
+                        <h5 class="fw-bold">{{ project.name }}</h5>
+                        <p class="text-muted small">{{ project.description }}</p>
+                        <a href="{{ url_for('projects.load_projects') }}/{{ project.id }}" class="btn btn-success btn-sm">Read More</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            No results found for "<span class="text-decoration-underline">{{ query }}</span>". Please try another search term.
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
