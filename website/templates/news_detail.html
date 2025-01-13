@@ -36,7 +36,7 @@
                 </div>
                 {% endif %}
 
-                <p class="news-description">{{ news.description }}</p>
+                <p class="news-description">{{ news.description | safe }}</p>
                 <div class="news-buttons mb-4">
                     {% if news.link %}
                     <a href="{{ news.link }}" target="_blank" class="btn btn-outline-success">Read More</a>

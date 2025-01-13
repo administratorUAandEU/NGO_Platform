@@ -24,7 +24,7 @@
             <div class="project-details">
                 <h1 class="display-4">{{ project.name }}</h1>
                 <p class="text-muted">{{ project.location }}</p>
-                <p class="project-description">{{ project.description }}</p>
+                <p class="project-description">{{ project.description | safe }}</p>
 
                 <div class="project-buttons mb-4">
                     {% if project.link %}
