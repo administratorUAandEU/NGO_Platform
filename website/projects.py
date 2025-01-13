@@ -1,8 +1,5 @@
 import os
 from flask import Blueprint, render_template, request, flash, redirect, url_for, abort
-from flask_login import login_required, current_user
-from werkzeug.utils import secure_filename
-from markupsafe import escape
 from .models import db, Project
 
 projects = Blueprint("projects", __name__)
@@ -43,7 +40,7 @@ def create_project():
     if request.method == "POST":
         project_name = request.form.get("name")
         project_location = request.form.get("location")
-        project_description = escape(request.form.get("description"))
+        project_description = request.form.get("description")
         project_link = request.form.get("link")
         image = request.files.get("image")
 

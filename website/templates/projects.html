@@ -25,7 +25,7 @@
                     <h5 class="card-title">{{ project.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ project.location }}</h6>
                     <p class="card-text card-text-hidden" id="description-{{ project.id }}"
-                        style="white-space: pre-wrap;">{{ project.description }}</p>
+                        style="white-space: pre-wrap;">{{ project.description | safe }}</p>
                     <button class="toggle-btn" data-target="description-{{ project.id }}">Read More</button>
                     <div class="mt-3">
                         <a href="{{ url_for('projects.view_project', project_id=project.id) }}"
