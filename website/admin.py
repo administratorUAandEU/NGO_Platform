@@ -1,15 +1,49 @@
 import os
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+import json
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from .models import db, Project, News, NewsTag, NewsTaggingTable
 
 admin = Blueprint("admin", __name__)
 
 UPLOAD_FOLDER = 'website/static/uploads'
-
+NUMBER_FILE_PATH = "website/static/resources/number_info.json"
 
 @admin.route("/administrator", methods=["GET", "POST"])
 def load_admin_menu():
-    return render_template('admin_menu.html')
+    try:
+        with open(NUMBER_FILE_PATH, "r", encoding='utf-8') as file:
+            data = json.load(file)
+
+        target = data.get("target", 1000)
+
+    except FileNotFoundError:
+        target = 10
+        print("\nJSON file not found. Using default value.\n")
+    except json.JSONDecodeError:
+        target = 10
+        print("\nInvalid JSON format. Using default value.\n")
+    return render_template('admin_menu.html', target=target)
+
+@admin.route("/administrator/update_number", methods=["POST"])
+def update_number():
+    data = request.get_json()
+    new_number = data.get("number")
+
+    if new_number is None:
+        return jsonify({"error": "Number is required"}), 400
+
+    try:
+        with open(NUMBER_FILE_PATH, "r") as file:
+            config = json.load(file)
+
+        config["target"] = new_number
+
+        with open(NUMBER_FILE_PATH, "w") as file:
+            json.dump(config, file)
+
+        return jsonify({"success": True, "new_number": new_number}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # Manage Projects

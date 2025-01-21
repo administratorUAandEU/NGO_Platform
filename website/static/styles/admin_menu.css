@@ -3,7 +3,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 .card-header {
-  background-color: #17a801;
+  background-color: var(--bs-success);
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -16,12 +16,13 @@
 }
 .list-group-item a {
   text-decoration: none;
-  color: #17a801;
-  transition: color 0.3s ease;
+  color: var(--bs-success);
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 .list-group-item a:hover {
-  color: #009952;
+  background-color: var(--bs-success-hover-bg);
   font-weight: bold;
+  border-radius: 5px;
 }
 .container {
   margin-top: 50px;
