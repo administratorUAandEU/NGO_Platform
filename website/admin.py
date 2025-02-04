@@ -1,12 +1,16 @@
 import os
-import json
+import json, uuid
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from .models import db, Project, News, NewsTag, NewsTaggingTable
+from werkzeug.utils import secure_filename
 
 admin = Blueprint("admin", __name__)
 
-UPLOAD_FOLDER = 'website/static/uploads'
+BASE_DIR = os.path.dirname(__file__)
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static/uploads')
+
 NUMBER_FILE_PATH = "website/static/resources/number_info.json"
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 @admin.route("/administrator", methods=["GET", "POST"])
 def load_admin_menu():
@@ -225,6 +229,34 @@ def add_tag():
     return render_template("create_tag.html")
 
 # Utils
+@admin.route("/upload_image", methods=["POST"])
+def upload_image():
+    if "upload" not in request.files:
+        return jsonify({"error": {"message": "No file uploaded"}}), 400
+
+    file = request.files["upload"]
+
+    if file.filename == "":
+        return jsonify({"error": {"message": "No selected file"}}), 400
+
+    if file and allowed_file(file.filename):
+        file_extension = os.path.splitext(file.filename)[1]
+        unique_filename = f"{uuid.uuid4().hex}{file_extension}"
+        filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
+        file.save(filepath)
+
+        file_url = url_for("static", filename=f"uploads/{unique_filename}", _external=True)
+
+        return jsonify({
+            "uploaded": True,
+            "url": file_url
+        }), 200
+
+    return jsonify({"error": {"message": "Invalid file type"}}), 400
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 def save_file_to_uploads(file, filename):
     '''
     Shortcut to save file to uploads.
