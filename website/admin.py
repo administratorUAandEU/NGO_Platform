@@ -2,7 +2,6 @@ import os
 import json, uuid
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from .models import db, Project, News, NewsTag, NewsTaggingTable
-from werkzeug.utils import secure_filename
 
 admin = Blueprint("admin", __name__)
 
