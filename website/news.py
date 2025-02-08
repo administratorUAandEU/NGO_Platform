@@ -18,6 +18,7 @@ news = Blueprint("news", __name__)
 
 @news.route("/news", methods=["GET", "POST"])
 def load_news():
+    all_tags = NewsTag.query.all()
     news_articles = News.query.all()
     news_data = []
 
@@ -36,7 +37,7 @@ def load_news():
             "tags": [tag.name for tag in article.tags]
         })
 
-    return render_template('news.html', news_articles=news_data)
+    return render_template('news.html', news_articles=news_data, all_tags = all_tags)
 
 @news.route("/news/new", methods=["GET", "POST"])
 def create_news():

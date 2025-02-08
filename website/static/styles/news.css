@@ -1,0 +1,284 @@
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+/* Ensure Filter is Below Hero */
+.container.mt-5 {
+    margin-top: 60px; /* Pushes filter below the hero section */
+}
+
+/* Sticky Filter - Moves on Scroll (Desktop) */
+@media (min-width: 992px) {
+    .sticky-filter {
+        position: sticky;
+        top: 120px; /* Ensures it sticks after hero */
+        z-index: 10;
+        background: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 30px; /* Prevents overlap with hero */
+    }
+}
+
+/* Keep Filters Clean */
+.filter-card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Improve Spacing Between Filter Items */
+.filter-card .form-check {
+    padding: 8px;
+}
+
+/* Make Checkboxes More Clickable */
+.filter-card .form-check-input {
+    width: 22px;
+    height: 22px;
+}
+
+/* Improve Label Visibility */
+.filter-card .form-check-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* News Cards */
+.news-card .card {
+    background: white;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.card-meta {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.card-tags {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #0057b8;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #ffd700;
+    color: #0057b8;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #f5e900;
+    color: #003f70;
+}
+
+/* Hide Mobile Filter by Default */
+@media (max-width: 992px) {
+    .filter-card {
+        display: none;
+    }
+}
+
+/* Show Filter when Button is Clicked */
+@media (max-width: 992px) {
+    .filter-card.active {
+        display: block;
+    }
+}
+
+/* Button to Open/Close Mobile Filter */
+.filter-toggle {
+    background-color: #ffd700;
+    color: #0057b8;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px 15px;
+    text-align: center;
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border: 2px solid #0057b8;
+}
+
+.filter-toggle:hover {
+    background-color: #ffcc00;
+    color: #0047ab;
+}
+
+/* Professional News Ticker */
+.news-ticker-container {
+    width: 100%;
+    background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
+    padding: 6px 0;
+    overflow: hidden;
+    margin-top: 10px; /* Ensures proper spacing below hero */
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.news-ticker {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.news-ticker ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    animation: ticker-scroll 100s linear infinite;
+}
+
+.news-ticker ul:hover {
+    animation-play-state: paused; /* Pause scrolling on hover */
+}
+
+.news-ticker li {
+    margin-right: 50px;
+}
+
+.news-ticker a {
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.news-ticker a:hover {
+    color: #ffeb3b;
+    transform: scale(1.05);
+}
+
+/* Scrolling Animation */
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .news-ticker-container {
+        height: auto;
+        padding: 7px 0;
+    }
+
+    .news-ticker ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        animation: ticker-scroll 100s linear infinite; /* Slowed down from 22s to 40s */
+        animation-delay: 0s;
+    }
+
+    .news-ticker a {
+        font-size: 14px;
+    }
+}
+
+/* Ensure images are responsive and fit within the content */
+.news-details img {
+    max-width: 100%; /* Ensures image does not overflow its container */
+    height: auto; /* Keeps the aspect ratio */
+    display: block; /* Prevents inline spacing issues */
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Adjust large images in Redactor content */
+.news-description img {
+    max-width: 100%; /* Ensures image is not wider than container */
+    height: auto; /* Keeps aspect ratio */
+    border-radius: 10px; /* Optional: Adds rounded corners */
+}
+
+/* Fix image overflow on small screens */
+@media (max-width: 768px) {
+    .news-details img,
+    .news-description img {
+        width: 100%; /* Forces image to fit within the screen */
+        max-height: 300px; /* Prevents images from being too tall */
+        object-fit: cover; /* Crops oversized images nicely */
+    }
+}
+
+/* Ensuring consistency in Redactor-generated images */
+.redactor-editor img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 10px auto;
+}
+
+/* ✅ Fix Large Images in News Cards */
+.news-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px; /* Adds slight rounding for modern appearance */
+}
+
+/* ✅ Fix Images Inside News Description */
+.news-description img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px; /* Ensures visual consistency */
+}
+
+/* ✅ Ensure Embedded Media (Videos, iframes, etc.) is Responsive */
+.news-card iframe,
+.news-description iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ✅ Adjust Large Images in Redactor Content */
+.redactor-editor img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 10px auto;
+}
+
+/* 📱 Mobile-Specific Image Fixes */
+@media (max-width: 768px) {
+    .news-card img,
+    .news-description img {
+        width: 100%;
+        max-height: 250px; /* Prevents images from being too tall */
+        object-fit: cover;
+    }
+}

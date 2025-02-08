@@ -33,7 +33,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Location</th>
-                        <th>Description</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -42,11 +41,6 @@
                     <tr>
                         <td>{{ project.name }}</td>
                         <td>{{ project.location }}</td>
-                        <td>
-                            <div class="admin-preview-wrapper">
-                                {{ project.description | safe }}
-                            </div>
-                        </td>
                         <td class="text-center">
                             <a href="{{ url_for('admin.edit_project', project_id=project.id) }}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-fill"></i> Edit

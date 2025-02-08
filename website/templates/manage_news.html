@@ -35,7 +35,6 @@
                         <th>Title</th>
                         <th>Location</th>
                         <th>Date</th>
-                        <th>Description</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -46,11 +45,6 @@
                         <td>{{ news_item.name }}</td>
                         <td>{{ news_item.location }}</td>
                         <td>{{ news_item.date }}</td>
-                        <td>
-                            <div class="admin-preview-wrapper">
-                                {{ news_item.description | safe }}
-                            </div>
-                        </td>
                         <td class="text-center">
                             <a href="{{ url_for('admin.edit_news', news_id=news_item.id) }}"
                                 class="btn btn-warning btn-sm">
