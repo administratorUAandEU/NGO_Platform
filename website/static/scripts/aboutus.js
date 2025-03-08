@@ -48,33 +48,43 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // Expand/Collapse Member Description
-    document.querySelectorAll(".show-more-btn").forEach((button) => {
+    // ✅ Ensure Show More Button Works
+    document.querySelectorAll(".show-more-btn").forEach(button => {
         button.addEventListener("click", () => {
             let description = button.nextElementSibling;
             let arrow = button.querySelector(".arrow-icon");
 
-            if (description.classList.contains("active")) {
-                gsap.to(description, { height: 0, opacity: 0, duration: 0.3, ease: "power2.out" });
-                description.classList.remove("active");
-                arrow.style.transform = "rotate(0deg)";
-            } else {
-                gsap.to(description, { height: "auto", opacity: 1, duration: 0.5, ease: "power2.inOut" });
-                description.classList.add("active");
+            // Toggle visibility of description
+            if (description.classList.contains("d-none")) {
+                description.classList.remove("d-none");
+                description.style.maxHeight = description.scrollHeight + "px"; // Expand smoothly
                 arrow.style.transform = "rotate(180deg)";
+            } else {
+                description.style.maxHeight = "0";
+                description.classList.add("d-none"); // Collapse smoothly
+                arrow.style.transform = "rotate(0deg)";
             }
         });
     });
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".partners-slider").forEach(slider => {
-            slider.addEventListener("mouseenter", () => {
-                slider.style.animationPlayState = "paused";
-            });
-    
-            slider.addEventListener("mouseleave", () => {
-                slider.style.animationPlayState = "running";
-            });
+
+    // ✅ Ensure Bootstrap 5 Carousel Works
+    let teamCarousel = document.querySelector("#teamCarousel");
+    if (teamCarousel) {
+        let carousel = new bootstrap.Carousel(teamCarousel, {
+            interval: 5000, // Auto-slide every 5 seconds
+            wrap: true, // Infinite looping
+            pause: "hover" // Pause on hover
+        });
+    }
+
+    // ✅ Fix Hover Pause for Partner Slider (Ensures Smooth Scrolling)
+    document.querySelectorAll(".partners-slider").forEach(slider => {
+        slider.addEventListener("mouseenter", () => {
+            slider.style.animationPlayState = "paused";
+        });
+
+        slider.addEventListener("mouseleave", () => {
+            slider.style.animationPlayState = "running";
         });
     });
-
 });
