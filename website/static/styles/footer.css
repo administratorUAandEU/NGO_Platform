@@ -1,0 +1,124 @@
+/* Footer Section */
+.footer-section {
+    background-color: #093e7b; /* Deep blue */
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Contact Section */
+.subtext {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.main-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffd700; /* Golden color */
+    margin: 0;
+}
+
+.main-title a {
+    text-decoration: none;
+    color: #ffd700;
+    transition: color 0.3s ease;
+}
+
+.main-title a:hover {
+    color: #f5e900;
+}
+
+/* Circle Button */
+.circle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ffd700;
+    color: #002856;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.circle-btn:hover {
+    transform: scale(1.1);
+    background-color: #f5e900;
+}
+
+/* Footer Links */
+.footer-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-link {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+    color: #f5e900;
+}
+
+/* Social Media Section */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icon img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon img:hover {
+    transform: scale(1.2);
+}
+
+/* Footer Columns */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Center the Button on Mobile */
+@media (max-width: 768px) {
+    .footer-section .text-end {
+        text-align: center !important; /* Ensures alignment */
+        margin-top: 15px; /* Adds spacing */
+    }
+
+    .circle-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Adjust Layout for Smaller Screens */
+@media (max-width: 768px) {
+    .row {
+        text-align: center;
+    }
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+}

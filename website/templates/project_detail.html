@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 
 <head>
     <meta charset="UTF-8">
@@ -7,31 +7,37 @@
     <title>{{ project.name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/styles/project_detail.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/project_detail.css') }}">
 </head>
 
 <body>
     {% include 'navbar.html' %}
 
-    <div class="container-fluid p-0">
-        <div class="project-image-container">
-            {% if project.image_path %}
+    <!-- Parallax Image Section -->
+    <div class="project-image-container">
+        {% if project.image_path %}
             <img src="{{ url_for('static', filename=project.image_path) }}" alt="{{ project.name }}" class="project-image">
-            {% endif %}
-        </div>
+        {% else %}
+            <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="Default Project Image" class="project-image">
+        {% endif %}
+    </div>
+    <!-- Main Content Section -->
+    <div class="container main-content-container">
+        <div class="project-details">
+            <h1>{{ project.name }}</h1>
+            <p class="text-muted">{{ project.location }} | {{ project.date }}</p>
 
-        <div class="container mt-4">
-            <div class="project-details">
-                <h1 class="display-4">{{ project.name }}</h1>
-                <p class="text-muted">{{ project.location }}</p>
-                <p class="project-description">{{ project.description | safe }}</p>
+            <!-- Project Description -->
+            <div class="project-description">
+                {{ project.description | safe }}
+            </div>
 
-                <div class="project-buttons mb-4">
-                    {% if project.link %}
-                    <a href="{{ project.link }}" target="_blank" class="btn btn-primary">Learn More</a>
-                    {% endif %}
-                    <a href="{{ url_for('projects.load_projects') }}" class="btn btn-secondary">Back to Projects</a>
-                </div>
+            <!-- Buttons -->
+            <div class="project-buttons">
+                {% if project.link %}
+                <a href="{{ project.link }}" target="_blank" class="btn btn-outline-success">Детальніше</a>
+                {% endif %}
+                <a href="{{ url_for('projects.load_projects') }}" class="btn btn-outline-primary">Повернутися до проєктів</a>
             </div>
         </div>
     </div>

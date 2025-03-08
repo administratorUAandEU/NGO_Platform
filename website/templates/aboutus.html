@@ -1,28 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/styles/number.css">
+    <title>Про нас | Агенція Європейського Співробітництва</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/aboutus.css') }}">
 </head>
 
 <body>
     {% include 'navbar.html' %}
-    <h1>ABOUT US</h1>
-    <div class="number" id="number">0</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="../static/scripts/number.js"></script>
-    <script>
-        const target = {{ target }};
-        const duration = {{ duration }};
-        animateNumber(target, duration, easeInOutQuad);
-    </script>
+    <!-- Parallax Header -->
+    <header class="parallax-header">
+        <div class="overlay">
+            <h1>Дізнайся більше про Агенцію Європейського Співробітництва</h1>
+            <p>Місце, де народжуються ідеї та реалізуються зміни</p>
+        </div>
+    </header>
+
+    <!-- Info Blocks -->
+    <section class="mission-section">
+        <div class="container">
+            <h2 class="section-title">Про ГО «Агенція Європейського Співробітництва»</h2>
+    
+            <!-- Mission -->
+            <div class="section-block mission">
+                <div class="content">
+                    <h3>Місія</h3>
+                    <p>Утвердити Україну як захищену демократичну країну сталого динамічного економічного розвитку, яка є членом ЄС та НАТО.</p>
+                    <p>Сприяти розвитку міцних зв'язків між громадами України та демократичними країнами-партнерами, 
+                    що підтримують вільний рух людей, товарів, послуг та інновацій.</p>
+                </div>
+            </div>
+    
+            <!-- Aim -->
+            <div class="section-block aim">
+                <div class="content">
+                    <h3>Мета</h3>
+                    <p>Захист та реалізація законних прав і інтересів членів Агенції, сприяння поширенню європейських цінностей в Україні.</p>
+                    <p>Підтримка освітніх проєктів, розвиток молоді, та розширення міжнародного співробітництва через партнерство з ЄС та НАТО.</p>
+                </div>
+            </div>
+    
+            <!-- Vision -->
+            <div class="section-block vision">
+                <div class="content">
+                    <h3>Візія</h3>
+                    <p>Громадська організація "Агенція Європейського Співробітництва" - це впливовий центр громадянського суспільства, 
+                    що об'єднує людей навколо спільних європейських цінностей та підтримує фундаментальні демократичні свободи.</p>
+                    <p>Створення потужної громадянської мережі для міжнародного співробітництва та сталого розвитку.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="activities-section">
+        <div class="container">
+            <h2 class="section-title text-center">Діяльність</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="activity-card">
+                        <h4>📚 Освіта</h4>
+                        <p>Розвиток громадянського суспільства через навчальні проєкти.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="activity-card">
+                        <h4>🏛️ Представництво</h4>
+                        <p>Захист інтересів громадських та освітніх установ.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="activity-card">
+                        <h4>🎓 Молодь</h4>
+                        <p>Створення можливостей для навчання та розвитку молоді.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="activity-card">
+                        <h4>🌍 Інтеграція</h4>
+                        <p>Зміцнення міжнародних зв'язків з європейськими інституціями.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="text-center">📸 Наші події</h2>
+            <div class="gallery-grid">
+                <img src="../static/images/photo1.jpg" alt="Event 1">
+                <img src="../static/images/photo2.jpg" alt="Event 2">
+                <img src="../static/images/photo3.jpg" alt="Event 3">
+                <img src="../static/images/photo4.jpg" alt="Event 4">
+            </div>
+        </div>
+    </section>
+    <!-- Team Section -->
+    <div class="team-section container mt-5">
+        <h2 class="text-center mb-4">Our Members</h2>
+        <div class="team-grid">
+
+            <!-- Member 1 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member1.jpg') }}" alt="Оксана Юринець">
+                <h4>Оксана Юринець</h4>
+                <p class="role">Президент ГО «АЄС»</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Оксана Юринець - Президент ГО «АЄС», керівник проєкту «Артерії демократії України: виклики та можливості для української молоді в контексті вступу до ЄС», професор кафедри Зовнішньоекономічної митної діяльності НУ «Львівська політехніка». Народний депутат Верховної ради України VIII скликання, Голова підкомітету у Комітеті з питань європейської інтеграції. Голова української делегації у Парламентській асамблеї НАТО (2018-2019 рр).</p>
+                </div>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member2.jpg') }}" alt="Лідія Лісовська">
+                <h4>Лідія Лісовська</h4>
+                <p class="role">Заст. керівника Грант. проєкту</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Лідія Лісовська - професор НУ «Львівська політехніка», заступник керівника Грантового проєкту.</p>
+                </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member3.jpg') }}" alt="Костів Юрій">
+                <h4>Костів Юрій</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Кандидат технічних наук, доцент кафедри безпеки інформаційних технологій, директор Інституту комп'ютерних технологій.</p>
+                </div>
+            </div>
+
+            <!-- Member 4 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member4.jpg') }}" alt="Рекуненко Ігор">
+                <h4>Рекуненко Ігор</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Доктор економічних наук, професор, завідувач кафедри управління імені Олега Балацького Сумського державного університету.</p>
+                </div>
+            </div>
+
+            <!-- Member 5 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member5.jpg') }}" alt="Олена Булатова">
+                <h4>Олена Булатова</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Доктор економічних наук, професор (КНУ імені Тараса Шевченка), виконавець міжнародних проєктів. Експерт з оцінки стратегій розвитку міст.</p>
+                </div>
+            </div>
+
+            <!-- Member 6 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member6.jpg') }}" alt="Андрій Кіт">
+                <h4>Андрій Кіт</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Політичний та економічний аналітик, експерт із розвитку бізнесу та міжнародного співробітництва.</p>
+                </div>
+            </div>
+
+            <!-- Member 7 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member7.jpg') }}" alt="Марина Руда">
+                <h4>Марина Руда</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Спеціаліст із міжнародних відносин, координатор освітніх проектів та ініціатив.</p>
+                </div>
+            </div>
+
+            <!-- Member 8 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member8.jpg') }}" alt="Василь Хом'як">
+                <h4>Василь Хом'як</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Експерт у галузі економічного розвитку, стратегічного планування та партнерства.</p>
+                </div>
+            </div>
+
+            <!-- Member 9 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member9.jpg') }}" alt="Ігор Руднев">
+                <h4>Ігор Руднев</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Експерт із розвитку міжнародного співробітництва та інвестиційних проектів.</p>
+                </div>
+            </div>
+
+            <!-- Member 10 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member10.jpg') }}" alt="Анна Гриценко">
+                <h4>Анна Гриценко</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Координатор програм підтримки молоді та розвитку громадянського суспільства.</p>
+                </div>
+            </div>
+
+            <!-- Member 11 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member11.jpg') }}" alt="Юлія Война">
+                <h4>Юлія Война</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Експерт із соціального розвитку та реалізації гуманітарних ініціатив.</p>
+                </div>
+            </div>
+
+            <!-- Member 12 -->
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/member12.jpg') }}" alt="Максим Підлубний">
+                <h4>Максим Підлубний</h4>
+                <p class="role">Регіональний координатор</p>
+                <button class="show-more-btn">
+    Детальніше <span class="arrow-icon">▼</span>
+</button>
+                <div class="member-description">
+                    <p>Координатор освітніх програм та міжнародного обміну студентів.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Partners Section -->
+    <div class="partners-section">
+        <h2 class="text-center">Наші Партнери</h2>
+        <div class="partners-wrapper">
+            <div class="partners-slider">
+                <a href="https://partner1.com" target="_blank"><img src="{{ url_for('static', filename='images/partner1.jpg') }}" alt="Partner 1"></a>
+                <a href="https://partner2.com" target="_blank"><img src="{{ url_for('static', filename='images/partner2.jpg') }}" alt="Partner 2"></a>
+                <a href="https://partner3.com" target="_blank"><img src="{{ url_for('static', filename='images/partner3.jpg') }}" alt="Partner 3"></a>
+                <a href="https://partner4.com" target="_blank"><img src="{{ url_for('static', filename='images/partner4.jpg') }}" alt="Partner 4"></a>
+                <a href="https://partner5.com" target="_blank"><img src="{{ url_for('static', filename='images/partner5.jpg') }}" alt="Partner 5"></a>
+                <a href="https://partner6.com" target="_blank"><img src="{{ url_for('static', filename='images/partner6.jpg') }}" alt="Partner 6"></a>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/aboutus.js') }}"></script>
 </body>
 
 </html>

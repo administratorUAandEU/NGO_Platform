@@ -1,34 +1,93 @@
-.card-text-hidden {
-  max-height: 80px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-  opacity: 1;
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
 }
 
-.card-text-visible {
-  max-height: 500px;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-  opacity: 1;
-}
-
-.toggle-btn {
-  display: inline-block;
-  font-size: 0.875rem;
-  color: #474b50;
-  background-color: transparent;
+/* Project Cards */
+.card {
+  background: white;
   border: none;
-  padding: 0;
-  margin-top: 0rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.2s ease;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.toggle-btn:hover {
-  text-decoration: underline;
-  color: #0e7929;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Buttons */
+.btn-outline-primary {
+  border: 2px solid #0057b8;
+  color: #0057b8;
+  font-weight: bold;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0057b8;
+  color: white;
+}
+
+.btn-outline-success {
+  border: 2px solid #28a745;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Projects Ticker */
+.news-ticker-container {
+  width: 100%;
+  background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
+  padding: 6px 0;
+  overflow: hidden;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.news-ticker ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: ticker-scroll 50s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Детальніше Button - Matches News */
+
+.details-btn {
+  display: inline-block; /* Ensure it's visible */
+  color: #0057b8;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 8px 20px;
+  border: 2px solid #0057b8;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.details-btn:hover {
+  background-color: #0057b8;
+  color: white;
+  transform: scale(1.05);
 }
