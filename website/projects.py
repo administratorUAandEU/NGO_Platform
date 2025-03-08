@@ -21,14 +21,15 @@ def load_projects():
         image_filename = project.image_path
         image_path = os.path.join(
             "website", "static", "uploads", image_filename if image_filename else 'NaN')
+        image_full_path = os.path.join(UPLOAD_FOLDER, image_filename) if image_filename else None
         project_data.append({
             "id": project.id,
             "name": project.name,
             "location": project.location,
             "description": project.description,
             "link": project.link,
-            "image_exists": os.path.exists(image_path),
-            "image_path": f"uploads/{image_filename}" if os.path.exists(image_path) else None,
+            "image_exists": os.path.exists(image_full_path) if image_filename else False,
+            "image_path": f"uploads/{image_filename}" if image_filename and os.path.exists(image_full_path) else None,
             "finished": project.finished
         })
 
@@ -57,8 +58,8 @@ def create_project():
         db.session.add(new_project)
         db.session.commit()
 
-        image_filename = None
         if image and allowed_file(image.filename):
+            new_project= Project.query.get(new_project.id)
             file_extension = os.path.splitext(image.filename)[1]
             image_filename = f"p{new_project.id}{file_extension}"
 

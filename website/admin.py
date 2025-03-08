@@ -98,8 +98,9 @@ def edit_project(project_id):
             if project.image_path:
                 delete_file_from_uploads(project.image_path)
 
-            image_path = os.path.join(UPLOAD_FOLDER, f"p{project.id}{get_file_extension(image_file)}")
+            image_path = os.path.join(UPLOAD_FOLDER, name := f"p{project.id}{get_file_extension(image_file)}")
             image_file.save(image_path)
+            project.image_path = name
 
         db.session.commit()
         flash("Project updated successfully.", category="success")
@@ -163,8 +164,9 @@ def edit_news(news_id):
             if news.image_path:
                 delete_file_from_uploads(news.image_path)
 
-            image_path = os.path.join(UPLOAD_FOLDER, f"n{news.id}{get_file_extension(image_file)}")
+            image_path = os.path.join(UPLOAD_FOLDER,name := f"n{news.id}{get_file_extension(image_file)}")
             image_file.save(image_path)
+            news.image_path = name
 
         db.session.commit()
         flash("News updated successfully.", category="success")

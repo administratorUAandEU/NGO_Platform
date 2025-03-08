@@ -35,8 +35,8 @@
                     placeholder="Enter project link (e.g., https://example.com)">
             </div>
             <div class="mb-3">
-                <label for="images" class="form-label">Project Images (multiple allowed)</label>
-                <input type="file" class="form-control" id="images" name="images" accept="image/*" multiple>
+                <label for="images" class="form-label">Image</label>
+                <input type="file" class="form-control" id="images" name="images">
             </div>            
             <button type="submit" class="btn btn-success mb-4">Create Project</button>
             <a href="{{ url_for('admin.manage_projects') }}" class="btn btn-secondary mb-4">Cancel</a>
