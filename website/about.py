@@ -4,8 +4,8 @@ import json
 about_us = Blueprint("about_us", __name__)
 NUMBER_FILE_PATH = "website/static/resources/number_info.json"
 
-@about_us.route("/about_us", methods=["GET", "POST"])
-def load_about_us():
+@about_us.route("/<lang>/about_us", methods=["GET", "POST"])
+def load_about_us(lang='ua'):
     try:
         with open(NUMBER_FILE_PATH, "r", encoding='utf-8') as file:
             data = json.load(file)
@@ -22,4 +22,4 @@ def load_about_us():
         duration = 2000
         print("\nInvalid JSON format. Using default values.\n")
 
-    return render_template('aboutus.html', target=target, duration=duration)
+    return render_template('aboutus.html', target=target, duration=duration, lang=lang)

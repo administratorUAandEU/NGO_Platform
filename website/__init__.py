@@ -52,26 +52,50 @@ def create_database(app):
     '''
     if not path.exists('instance/' + DB_NAME):
         models.db.create_all()
-        t1 = models.NewsTag(
+        NewsTagModel = models.NewsTagEN
+        t1 = NewsTagModel(
             name = 'News'
         )
-        t2 = models.NewsTag(
+        t2 = NewsTagModel(
             name = 'Interviews'
         )
-        t3 = models.NewsTag(
+        t3 = NewsTagModel(
             name = 'Articles'
         )
-        t4 = models.NewsTag(
+        t4 = NewsTagModel(
             name = 'Euro-Atlantic integration'
         )
-        t5 = models.NewsTag(
+        t5 = NewsTagModel(
             name = 'Russian-Ukrainian war'
         )
-        t6 = models.NewsTag(
+        t6 = NewsTagModel(
             name = 'Regions development'
         )
-        t7 = models.NewsTag(
+        t7 = NewsTagModel(
             name = 'Environmental protection'
+        )
+        models.db.session.add_all([t1,t2,t3,t4,t5,t6,t7])
+        NewsTagModel = models.NewsTag
+        t1 = NewsTagModel(
+            name = 'Новини'
+        )
+        t2 = NewsTagModel(
+            name = 'Інтерв\'ю'
+        )
+        t3 = NewsTagModel(
+            name = 'Заголовки'
+        )
+        t4 = NewsTagModel(
+            name = 'Євро-Атлантична інтеграція'
+        )
+        t5 = NewsTagModel(
+            name = 'Російсько-Українська війна'
+        )
+        t6 = NewsTagModel(
+            name = 'Розвиток регіонів'
+        )
+        t7 = NewsTagModel(
+            name = 'Захист Довкілля'
         )
         models.db.session.add_all([t1,t2,t3,t4,t5,t6,t7])
         models.db.session.commit()

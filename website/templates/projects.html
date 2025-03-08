@@ -40,7 +40,7 @@
                         <h5 class="card-title">{{ project.name }}</h5>
                         <p class="card-text"><strong>Локація:</strong> {{ project.location }}</p>
                         <p class="text-muted">Project ID: {{ project.id }}</p>
-                        <a href="{{ url_for('projects.view_project', project_id=project.id) }}" 
+                        <a href="{{ url_for('projects.view_project', project_id=project.id, lang=lang) }}" 
                            class="btn btn-outline-primary details-btn">Детальніше</a>
                         {% if project.link %}
                         <a href="{{ project.link }}" target="_blank" class="btn btn-outline-success">Читати більше</a>

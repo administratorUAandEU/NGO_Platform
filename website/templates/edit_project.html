@@ -14,7 +14,7 @@
     {% include 'navbar.html' %}
     <div class="container mt-5">
         <h1>Edit Project</h1>
-        <form method="POST" action="{{ url_for('admin.edit_project', project_id=project.id) }}" enctype="multipart/form-data" class="mb-4">
+        <form method="POST" action="{{ url_for('admin.edit_project', project_id=project.id, lang=lang) }}" enctype="multipart/form-data" class="mb-4">
             <div class="mb-3">
                 <label for="name" class="form-label">Project Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ project.name }}" required>
@@ -43,7 +43,7 @@
                 {% endif %}
             </div>
             <button type="submit" class="btn btn-success">Save Changes</button>
-            <a href="{{ url_for('admin.manage_projects') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ url_for('admin.manage_projects', lang=lang) }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 

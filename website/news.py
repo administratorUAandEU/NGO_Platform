@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, render_template, request, flash, abort, redirect, url_for
-from .models import db, News, NewsTag
+from .models import db, News, NewsEN, NewsTag, NewsTagEN
 from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 from datetime import datetime
@@ -16,10 +16,16 @@ def allowed_file(filename):
 news = Blueprint("news", __name__)
 
 
-@news.route("/news", methods=["GET", "POST"])
-def load_news():
-    all_tags = NewsTag.query.all()
-    news_articles = News.query.all()
+@news.route("/<lang>/news", methods=["GET", "POST"])
+def load_news(lang):
+    if lang not in ["en", "ua"]:
+        abort(404)
+
+    NewsModel = NewsEN if lang == "en" else News
+    NewsTagModel = NewsTagEN if lang == "en" else NewsTag
+
+    all_tags = NewsTagModel.query.all()
+    news_articles = NewsModel.query.all()
     news_data = []
 
     for article in news_articles:
@@ -37,10 +43,17 @@ def load_news():
             "tags": [tag.name for tag in article.tags]
         })
 
-    return render_template('news.html', news_articles=news_data, all_tags = all_tags)
+    return render_template('news.html', news_articles=news_data, all_tags=all_tags, lang=lang)
 
-@news.route("/news/new", methods=["GET", "POST"])
-def create_news():
+
+@news.route("/<lang>/news/new", methods=["GET", "POST"])
+def create_news(lang):
+    if lang not in ["en", "ua"]:
+        abort(404)
+
+    NewsModel = NewsEN if lang == "en" else News
+    NewsTagModel = NewsTagEN if lang == "en" else NewsTag
+
     if request.method == "POST":
         name = request.form.get("name")
         location = request.form.get("location")
@@ -50,11 +63,11 @@ def create_news():
 
         if not name or not location or not description:
             flash("Name, location, and description are required.", category="error")
-            return redirect(url_for("news.create_news"))
+            return redirect(url_for("news.create_news", lang=lang))
 
         news_date = datetime.today().date()
 
-        new_news = News(
+        new_news = NewsModel(
             name=name,
             location=location,
             description=description,
@@ -65,9 +78,9 @@ def create_news():
         db.session.add(new_news)
 
         for tag_name in tag_names:
-            tag = NewsTag.query.filter_by(name=tag_name).first()
+            tag = NewsTagModel.query.filter_by(name=tag_name).first()
             if not tag:
-                tag = NewsTag(name=tag_name)
+                tag = NewsTagModel(name=tag_name)
                 db.session.add(tag)
             new_news.tags.append(tag)
 
@@ -89,18 +102,23 @@ def create_news():
                     db.session.commit()
 
             flash("News article created successfully!", category="success")
-            return redirect(url_for('admin.manage_news'))
+            return redirect(url_for('admin.manage_news', lang=lang))
         except IntegrityError:
             db.session.rollback()
             flash("Error creating news article.", category="error")
-            return redirect(url_for("news.create_news"))
+            return redirect(url_for("news.create_news", lang=lang))
 
-    tags = NewsTag.query.all()
-    return render_template("create_news.html", tags=tags)
+    tags = NewsTagModel.query.all()
+    return render_template("create_news.html", tags=tags, lang=lang)
 
-@news.route("/news/<int:project_id>", methods=["GET"])
-def view_project(project_id):
-    _news = News.query.get(project_id)
+
+@news.route("/<lang>/news/<int:news_id>", methods=["GET"])
+def view_news(lang, news_id):
+    if lang not in ["en", "ua"]:
+        abort(404)
+
+    NewsModel = NewsEN if lang == "en" else News
+    _news = NewsModel.query.get(news_id)
     if not _news:
         abort(404)
 
@@ -117,4 +135,4 @@ def view_project(project_id):
         "tags": _news.tags
     }
 
-    return render_template("news_detail.html", news=news_data)
+    return render_template("news_detail.html", news=news_data, lang=lang)

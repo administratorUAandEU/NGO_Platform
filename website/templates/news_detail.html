@@ -46,7 +46,7 @@
                 {% if news.link %}
                 <a href="{{ news.link }}" target="_blank" class="btn btn-outline-success">Читати більше</a>
                 {% endif %}
-                <a href="{{ url_for('news.load_news') }}" class="btn btn-outline-primary">Повернутися до новин</a>
+                <a href="{{ url_for('news.load_news', lang=lang) }}" class="btn btn-outline-primary">Повернутися до новин</a>
             </div>
         </div>
     </div>

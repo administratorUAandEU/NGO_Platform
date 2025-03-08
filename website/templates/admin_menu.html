@@ -20,13 +20,13 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <a href="{{ url_for('admin.manage_projects') }}">Manage Projects</a>
+                    <a href="{{ url_for('admin.manage_projects', lang=lang) }}">Manage Projects</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="{{ url_for('admin.manage_news') }}">Manage News</a>
+                    <a href="{{ url_for('admin.manage_news', lang=lang) }}">Manage News</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="{{ url_for('admin.manage_tags') }}">Manage NewsTags</a>
+                    <a href="{{ url_for('admin.manage_tags', lang=lang) }}">Manage NewsTags</a>
                 </li>
             </ul>
         </div>

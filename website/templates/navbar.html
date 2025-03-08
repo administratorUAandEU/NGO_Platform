@@ -7,19 +7,41 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('news.load_news') }}">News</a>
+                    <a class="nav-link" href="{{ url_for('news.load_news', lang=lang) }}">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('projects.load_projects') }}">Projects</a>
+                    <a class="nav-link" href="{{ url_for('projects.load_projects', lang=lang) }}">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('about_us.load_about_us') }}">About us</a>
+                    <a class="nav-link" href="{{ url_for('about_us.load_about_us', lang=lang) }}">About us</a>
                 </li>
             </ul>
-            <form class="d-flex" method="get" action="{{ url_for('search.search_page') }}">
+            <form class="d-flex" method="get" action="{{ url_for('search.search_page', lang=lang) }}">
                 <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        {% if 'project_id' in request.view_args %}
+                            <a href="{{ url_for(request.endpoint, lang='en', project_id=request.view_args['project_id']) }}">EN</a>
+                        {% elif 'news_id' in request.view_args %}
+                            <a href="{{ url_for(request.endpoint, lang='en', news_id=request.view_args['news_id']) }}">EN</a>
+                        {% else %}
+                            <a href="{{ url_for(request.endpoint, lang='en') }}">EN</a>
+                        {% endif %}
+                    </li>
+                    <li class="breadcrumb-item">
+                        {% if 'project_id' in request.view_args %}
+                            <a href="{{ url_for(request.endpoint, lang='ua', project_id=request.view_args['project_id']) }}">UA</a>
+                        {% elif 'news_id' in request.view_args %}
+                            <a href="{{ url_for(request.endpoint, lang='ua', news_id=request.view_args['news_id']) }}">UA</a>
+                        {% else %}
+                            <a href="{{ url_for(request.endpoint, lang='ua') }}">UA</a>
+                        {% endif %}
+                    </li>
+                </ol>
+            </nav>
         </div>
     </div>
 </nav>

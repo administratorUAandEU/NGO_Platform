@@ -37,7 +37,7 @@
                 {% if project.link %}
                 <a href="{{ project.link }}" target="_blank" class="btn btn-outline-success">Детальніше</a>
                 {% endif %}
-                <a href="{{ url_for('projects.load_projects') }}" class="btn btn-outline-primary">Повернутися до проєктів</a>
+                <a href="{{ url_for('projects.load_projects', lang=lang) }}" class="btn btn-outline-primary">Повернутися до проєктів</a>
             </div>
         </div>
     </div>

@@ -18,13 +18,13 @@
             <h1 class="h3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url_for('admin.load_admin_menu') }}">Admin Menu</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.load_admin_menu', lang=lang) }}">Admin Menu</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Manage Tags</li>
                     </ol>
                 </nav>
             </h1>
 
-            <a href="{{ url_for('admin.add_tag') }}" class="btn btn-success">Add Tag</a>
+            <a href="{{ url_for('admin.add_tag', lang=lang) }}" class="btn btn-success">Add Tag</a>
         </div>
 
         {% if tags %}
@@ -43,10 +43,10 @@
                         <td>{{ tag.id }}</td>
                         <td>{{ tag.name }}</td>
                         <td class="text-center">
-                            <a href="{{ url_for('admin.edit_tag', tag_id=tag.id) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ url_for('admin.edit_tag', tag_id=tag.id, lang=lang) }}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-fill"></i> Edit
                             </a>
-                            <form action="{{ url_for('admin.delete_tag', tag_id=tag.id) }}" method="POST"
+                            <form action="{{ url_for('admin.delete_tag', tag_id=tag.id, lang=lang) }}" method="POST"
                                 class="d-inline-block">
                                 <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Are you sure you want to delete this tag?');">
@@ -61,7 +61,7 @@
         </div>
         {% else %}
         <div class="alert alert-info text-center">
-            No tags found. Click <a href="{{ url_for('admin.add_tag') }}" class="alert-link">here</a> to add one.
+            No tags found. Click <a href="{{ url_for('admin.add_tag', lang=lang) }}" class="alert-link">here</a> to add one.
         </div>
         {% endif %}
     </div>

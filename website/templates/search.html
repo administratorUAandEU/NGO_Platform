@@ -37,7 +37,7 @@
                     {% for news in results.news %}
                     <li class="list-group-item">
                         <h5 class="fw-bold">{{ news.name }}</h5>
-                        <a href="{{ url_for('news.load_news') }}/{{ news.id }}" class="btn btn-success btn-sm">Read More</a>
+                        <a href="{{ url_for('news.view_news', news_id=news.id, lang=lang) }}" class="btn btn-success btn-sm">Read More</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -51,7 +51,7 @@
                     {% for project in results.projects %}
                     <li class="list-group-item">
                         <h5 class="fw-bold">{{ project.name }}</h5>
-                        <a href="{{ url_for('projects.load_projects') }}/{{ project.id }}" class="btn btn-success btn-sm">Read More</a>
+                        <a href="{{ url_for('projects.view_project', project_id=project.id, lang=lang) }}" class="btn btn-success btn-sm">Read More</a>
                     </li>
                     {% endfor %}
                 </ul>

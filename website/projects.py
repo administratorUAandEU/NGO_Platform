@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, render_template, request, flash, redirect, url_for, abort
-from .models import db, Project
+from .models import db, Project, ProjectEN
 
 projects = Blueprint("projects", __name__)
 
@@ -12,9 +12,13 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@projects.route("/projects", methods=["GET"])
-def load_projects():
-    _projects = Project.query.all()
+@projects.route("/<lang>/projects", methods=["GET"])
+def load_projects(lang):
+    if lang not in ["en", "ua"]:
+        abort(404)
+
+    ProjectModel = ProjectEN if lang == "en" else Project
+    _projects = ProjectModel.query.all()
     project_data = []
 
     for project in _projects:
@@ -33,11 +37,16 @@ def load_projects():
             "finished": project.finished
         })
 
-    return render_template("projects.html", projects=project_data)
+    return render_template("projects.html", projects=project_data, lang=lang)
 
 
-@projects.route("/projects/new", methods=["GET", "POST"])
-def create_project():
+@projects.route("/<lang>/projects/new", methods=["GET", "POST"])
+def create_project(lang):
+    if lang not in ["en", "ua"]:
+        abort(404)
+
+    ProjectModel = ProjectEN if lang == "en" else Project
+
     if request.method == "POST":
         project_name = request.form.get("name")
         project_location = request.form.get("location")
@@ -47,9 +56,9 @@ def create_project():
 
         if not project_name or not project_location or not project_description:
             flash("All fields except 'Link' are required.", category="error")
-            return redirect(url_for("projects.create_project"))
+            return redirect(url_for("projects.create_project", lang=lang))
 
-        new_project = Project(
+        new_project = ProjectModel(
             name=project_name,
             location=project_location,
             description=project_description,
@@ -59,9 +68,9 @@ def create_project():
         db.session.commit()
 
         if image and allowed_file(image.filename):
-            new_project= Project.query.get(new_project.id)
+            new_project = ProjectModel.query.get(new_project.id)
             file_extension = os.path.splitext(image.filename)[1]
-            image_filename = f"p{new_project.id}{file_extension}"
+            image_filename = f"p{lang}{new_project.id}{file_extension}"
 
             image_path = os.path.join(UPLOAD_FOLDER, image_filename)
             image.save(image_path)
@@ -70,14 +79,18 @@ def create_project():
             db.session.commit()
 
         flash("Project created successfully!", category="success")
-        return redirect(url_for('admin.manage_projects'))
+        return redirect(url_for('admin.manage_projects', lang=lang))
 
-    return render_template("create_project.html")
+    return render_template("create_project.html", lang=lang)
 
 
-@projects.route("/projects/<int:project_id>", methods=["GET"])
-def view_project(project_id):
-    project = Project.query.get(project_id)
+@projects.route("/<lang>/projects/<int:project_id>", methods=["GET"])
+def view_project(lang, project_id):
+    if lang not in ["en", "ua"]:
+        abort(404)
+
+    ProjectModel = ProjectEN if lang == "en" else Project
+    project = ProjectModel.query.get(project_id)
     if not project:
         abort(404)
 
@@ -93,4 +106,4 @@ def view_project(project_id):
         "finished": project.finished
     }
 
-    return render_template("project_detail.html", project=project_data)
+    return render_template("project_detail.html", project=project_data, lang=lang)

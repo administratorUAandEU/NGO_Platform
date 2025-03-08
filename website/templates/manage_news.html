@@ -18,12 +18,12 @@
             <h1 class="h3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url_for('admin.load_admin_menu') }}">Admin Menu</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.load_admin_menu', lang=lang) }}">Admin Menu</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Manage News</li>
                     </ol>
                 </nav>
             </h1>
-            <a href="{{ url_for('news.create_news') }}" class="btn btn-success">Add News</a>
+            <a href="{{ url_for('news.create_news', lang=lang) }}" class="btn btn-success">Add News</a>
         </div>
 
         {% if news_list %}
@@ -46,11 +46,11 @@
                         <td>{{ news_item.location }}</td>
                         <td>{{ news_item.date }}</td>
                         <td class="text-center">
-                            <a href="{{ url_for('admin.edit_news', news_id=news_item.id) }}"
+                            <a href="{{ url_for('admin.edit_news', news_id=news_item.id, lang=lang) }}"
                                 class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-fill"></i> Edit
                             </a>
-                            <form action="{{ url_for('admin.delete_news', news_id=news_item.id) }}" method="POST"
+                            <form action="{{ url_for('admin.delete_news', news_id=news_item.id, lang=lang) }}" method="POST"
                                 class="d-inline-block">
                                 <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Are you sure you want to delete this news item?');">
@@ -65,7 +65,7 @@
         </div>
         {% else %}
         <div class="alert alert-info text-center">
-            No news found. Click <a href="{{ url_for('news.create_news') }}" class="alert-link">here</a> to add one.
+            No news found. Click <a href="{{ url_for('news.create_news', lang=lang) }}" class="alert-link">here</a> to add one.
         </div>
         {% endif %}
     </div>
