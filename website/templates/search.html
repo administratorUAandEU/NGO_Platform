@@ -7,6 +7,7 @@
     <title>Search Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">
 </head>
 
 <body>
@@ -30,41 +31,90 @@
 
         {% if results.news or results.projects %}
         <div class="row">
+            <!-- News Section -->
             {% if results.news %}
             <div class="col-md-6" id="news-section">
                 <h2 class="mb-3">News</h2>
-                <ul class="list-group mb-5">
+                <div class="results-container">
                     {% for news in results.news %}
-                    <li class="list-group-item">
-                        <h5 class="fw-bold">{{ news.name }}</h5>
-                        <a href="{{ url_for('news.view_news', news_id=news.id, lang=lang) }}" class="btn btn-success btn-sm">Read More</a>
-                    </li>
+                    <div class="result-card">
+                        <!-- News Image -->
+                        {% if news.image_path and news.image_path != 'None' %}
+                        <img src="{{ url_for('static', filename='uploads/' + news.image_path) }}" alt="{{ news.name }}" class="result-image">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/default-news.png') }}" alt="Default News Image" class="result-image">
+                        {% endif %}
+        
+                        <!-- News Content -->
+                        <div class="result-content">
+                            <h5 class="fw-bold">{{ news.name }}</h5>
+                            <p class="text-muted">{{ news.location }} | {{ news.date }}</p>
+        
+                            <!-- Read More Button -->
+                            <a href="{{ url_for('news.view_news', news_id=news.id, lang=lang) }}" class="btn btn-success btn-sm">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
             {% endif %}
-
+        
+            <!-- Projects Section -->
             {% if results.projects %}
             <div class="col-md-6" id="projects-section">
                 <h2 class="mb-3">Projects</h2>
-                <ul class="list-group mb-5">
+                <div class="results-container">
                     {% for project in results.projects %}
-                    <li class="list-group-item">
-                        <h5 class="fw-bold">{{ project.name }}</h5>
-                        <a href="{{ url_for('projects.view_project', project_id=project.id, lang=lang) }}" class="btn btn-success btn-sm">Read More</a>
-                    </li>
+                    <div class="result-card">
+                        <!-- Project Image -->
+                        {% if project.image_path and project.image_path != 'None' %}
+                        <img src="{{ url_for('static', filename='uploads/' + project.image_path) }}" alt="{{ project.name }}" class="result-image">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="Default Project Image" class="result-image">
+                        {% endif %}
+            
+                        <!-- Project Content -->
+                        <div class="result-content">
+                            <h5 class="fw-bold">
+                                {{ project.name }}
+                                <!-- ✅ Status Badge (Green = Finished, Yellow = In Progress) -->
+                                {% if project.finished %}
+                                <span class="badge bg-success">Finished</span>
+                                {% else %}
+                                <span class="badge bg-warning text-dark">In Progress</span>
+                                {% endif %}
+                            </h5>
+                            <p class="text-muted">{{ project.location }}</p>
+            
+                            <!-- Read More Button -->
+                            <a href="{{ url_for('projects.view_project', project_id=project.id, lang=lang) }}" class="btn btn-success btn-sm">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
             {% endif %}
         </div>
         {% else %}
-        <div class="alert alert-warning" role="alert">
-            No results found for "<span class="text-decoration-underline">{{ query }}</span>". Please try another search term.
+        <div class="no-results-container">
+            <div class="no-results-card">
+                <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="No Results" class="no-results-image">
+                <h4 class="no-results-title">
+                    No results found for <span class="query-highlight">"{{ query }}"</span>
+                </h4>
+                <p class="no-results-text">
+                    Try searching with different keywords or explore more about us.
+                </p>
+                <a href="{{ url_for('about_us.load_about_us', lang=lang) }}" class="btn btn-primary">
+                    Return to About Us
+                </a>
+            </div>
         </div>
         {% endif %}
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

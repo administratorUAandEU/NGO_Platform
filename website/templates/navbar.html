@@ -1,12 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/aboutus.css') }}">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/navbar.css') }}">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Logo / Brand -->
+        <a class="navbar-brand" href="{{ url_for('about_us.load_about_us', lang=lang) }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="navbar-logo">
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('news.load_news', lang=lang) }}">News</a>
                 </li>
@@ -17,32 +25,47 @@
                     <a class="nav-link" href="{{ url_for('about_us.load_about_us', lang=lang) }}">About us</a>
                 </li>
             </ul>
-            <form class="d-flex" method="get" action="{{ url_for('search.search_page', lang=lang) }}">
-                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+
+            <!-- Search Bar -->
+            <form class="d-flex search-form" method="get" action="{{ url_for('search.search_page', lang=lang) }}">
+                <input class="form-control search-input" type="search" name="query" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-search" type="submit">🔍</button>
             </form>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item">
-                        {% if 'project_id' in request.view_args %}
-                            <a href="{{ url_for(request.endpoint, lang='en', project_id=request.view_args['project_id']) }}">EN</a>
-                        {% elif 'news_id' in request.view_args %}
-                            <a href="{{ url_for(request.endpoint, lang='en', news_id=request.view_args['news_id']) }}">EN</a>
-                        {% else %}
-                            <a href="{{ url_for(request.endpoint, lang='en') }}">EN</a>
-                        {% endif %}
-                    </li>
-                    <li class="breadcrumb-item">
-                        {% if 'project_id' in request.view_args %}
-                            <a href="{{ url_for(request.endpoint, lang='ua', project_id=request.view_args['project_id']) }}">UA</a>
-                        {% elif 'news_id' in request.view_args %}
-                            <a href="{{ url_for(request.endpoint, lang='ua', news_id=request.view_args['news_id']) }}">UA</a>
-                        {% else %}
-                            <a href="{{ url_for(request.endpoint, lang='ua') }}">UA</a>
-                        {% endif %}
-                    </li>
-                </ol>
-            </nav>
+            <div class="language-switcher">
+                {% set args_en = request.view_args.copy() if request.view_args else {} %}
+                {% set args_ua = request.view_args.copy() if request.view_args else {} %}
+            
+                {% set args_en = args_en.update({'lang': 'en'}) or args_en %}
+                {% set args_ua = args_ua.update({'lang': 'ua'}) or args_ua %}
+            
+                <a href="{{ url_for(request.endpoint, **args_en) }}" class="lang-link">EN</a>
+                <span class="lang-divider">|</span>
+                <a href="{{ url_for(request.endpoint, **args_ua) }}" class="lang-link">UA</a>
+            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let navLinks = document.querySelectorAll(".nav-link");
+            let navbarToggler = document.querySelector(".navbar-toggler");
+            let navbarCollapse = document.querySelector(".navbar-collapse");
+        
+            navLinks.forEach(function (link) {
+                link.addEventListener("click", function () {
+                    if (navbarCollapse.classList.contains("show")) {
+                        new bootstrap.Collapse(navbarCollapse).hide();
+                    }
+                });
+            });
+        
+            // Close navbar if clicking outside it (for mobile)
+            document.addEventListener("click", function (event) {
+                if (!navbarToggler.contains(event.target) && !navbarCollapse.contains(event.target)) {
+                    if (navbarCollapse.classList.contains("show")) {
+                        new bootstrap.Collapse(navbarCollapse).hide();
+                    }
+                }
+            });
+        });
+        </script>
 </nav>

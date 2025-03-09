@@ -1,16 +1,37 @@
-/* Hero Section */
+/* 🔹 Improved Hero Section */
 .hero-section {
-  background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
+  width: 100%;
+  height: 18vh; /* Slightly smaller */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #0057b8, #003f70);
   color: white;
-  padding: 80px 0;
+  padding: 25px 0;
+  position: relative;
   text-align: center;
 }
 
-/* Project Cards */
+/* Ensures Navbar Doesn't Overlap */
+body {
+  padding-top: 85px; /* Push content below navbar */
+}
+
+/* 🔹 Project Section Titles */
+h3.text-warning, h3.text-success {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+/* 🔹 Card Styling */
 .card {
   background: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -19,17 +40,62 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* 🔹 Project Images */
 .card-img-top {
-  height: 180px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px 8px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
-/* Buttons */
+/* 🔹 Project Info */
+.card-body {
+  padding: 20px;
+}
+
+/* 🔹 Title & Badges */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🔹 Location & ID */
+.card-text {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* 🔹 Badges */
+.badge {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.badge.bg-warning {
+  color: #856404;
+  background-color: #ffcc00;
+}
+
+.badge.bg-success {
+  background-color: #28a745;
+}
+
+/* 🔹 Buttons */
+.btn-outline-primary, .btn-outline-success {
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+}
+
 .btn-outline-primary {
   border: 2px solid #0057b8;
   color: #0057b8;
-  font-weight: bold;
 }
 
 .btn-outline-primary:hover {
@@ -40,7 +106,6 @@
 .btn-outline-success {
   border: 2px solid #28a745;
   color: #28a745;
-  font-weight: bold;
 }
 
 .btn-outline-success:hover {
@@ -48,7 +113,7 @@
   color: white;
 }
 
-/* Projects Ticker */
+/* 🔹 News Ticker */
 .news-ticker-container {
   width: 100%;
   background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
@@ -72,22 +137,98 @@
   100% { transform: translateX(-100%); }
 }
 
-/* Детальніше Button - Matches News */
-
 .details-btn {
-  display: inline-block; /* Ensure it's visible */
+  display: inline-block !important;  /* ✅ Ensure it’s always shown */
   color: #0057b8;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
-  padding: 8px 20px;
+  padding: 8px 15px;
   border: 2px solid #0057b8;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
   text-align: center;
+  margin-top: 10px;  /* ✅ Space between button and content */
 }
 
 .details-btn:hover {
   background-color: #0057b8;
   color: white;
   transform: scale(1.05);
+}
+
+/* 🔹 Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+      height: 25vh;
+  }
+
+  .hero-title {
+      font-size: 2rem;
+  }
+
+  .hero-subtitle {
+      font-size: 1rem;
+  }
+
+  .card-title {
+      font-size: 1rem;
+  }
+
+  .badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+  }
+
+  .btn-outline-primary, .btn-outline-success {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+  }
+}
+
+/* 🔹 Message for Empty Sections */
+.empty-message {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #666;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 15px;
+}
+
+/* 🔹 Ensure Cards Are Aligned Nicely */
+.projects-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* 🔹 Section Headers */
+h3.text-warning, h3.text-success {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+/* 🔹 Responsive Adjustments */
+@media (max-width: 768px) {
+  .empty-message {
+      font-size: 1rem;
+      padding: 15px;
+  }
+}
+
+/* Add spacing between the blue header and the project sections */
+.project-section {
+  margin-top: 40px; /* Increase space */
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .project-section {
+      margin-top: 30px; /* Slightly smaller space for mobile */
+  }
 }

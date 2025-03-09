@@ -1,11 +1,54 @@
-/* Hero Section */
+/* Hero Section - Smaller Height */
 .hero-section {
-    background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
+    width: 100%;
+    height: 40vh; /* Reduced height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #0057b8, #003f70); /* Gradient background */
     color: white;
-    padding: 80px 0;
+    padding: 30px 0; /* Adjusted padding */
+    position: relative;
     text-align: center;
 }
 
+/* Ensure text is readable */
+.hero-title {
+    font-size: 2.5rem; /* Adjusted for better visibility */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Fix overlapping issue with navbar */
+.hero-section .container {
+    position: relative;
+    z-index: 2; /* Ensures text stays above background */
+}
+
+/* Ensure Navbar Doesn't Overlap */
+body {
+    padding-top: 80px; /* Pushes content below navbar */
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 30vh; /* Smaller height on mobile */
+    }
+
+    .hero-title {
+        font-size: 2rem; /* Adjust font size */
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
 /* Ensure Filter is Below Hero */
 .container.mt-5 {
     margin-top: 60px; /* Pushes filter below the hero section */
@@ -88,7 +131,7 @@
 }
 
 .btn-primary:hover {
-    background-color: #f5e900;
+    background-color: #040403;
     color: #003f70;
 }
 
@@ -128,6 +171,7 @@
 
 /* Professional News Ticker */
 .news-ticker-container {
+    height: 50px;
     width: 100%;
     background: linear-gradient(to right, #002f6c, #0057b8, #0085d4);
     padding: 6px 0;
@@ -281,4 +325,16 @@
         max-height: 250px; /* Prevents images from being too tall */
         object-fit: cover;
     }
+}
+
+/* Styling for the "Nothing here" message */
+.no-news-message {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
 }

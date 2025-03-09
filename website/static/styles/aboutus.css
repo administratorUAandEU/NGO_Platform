@@ -472,3 +472,19 @@
         font-size: 0.9rem;
     }
 }
+
+
+/* Ensure Arrow Icons are Visible */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1); /* Make icons white */
+    opacity: 1;
+}
+
+/* Fix Button Placement */
+.carousel-control-prev {
+    left: -10px; /* Adjust as needed */
+}
+
+.carousel-control-next {
+    right: -10px; /* Adjust as needed */
+}

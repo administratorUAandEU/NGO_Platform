@@ -33,6 +33,26 @@
     color: #f5e900;
 }
 
+/* ✅ Styled Gmail Link */
+.footer-email a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffd700; /* Golden yellow */
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.footer-email a:hover {
+    color: #093e7b; /* Deep blue text */
+    background-color: #ffd700; /* Golden yellow background */
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+
 /* Circle Button */
 .circle-btn {
     width: 60px;
@@ -48,7 +68,6 @@
     text-decoration: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
-
 
 .circle-btn:hover {
     transform: scale(1.1);
