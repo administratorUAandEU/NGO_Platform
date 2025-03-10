@@ -8,7 +8,7 @@ home = Blueprint("home", __name__)
 @home.route("/<lang>/home", methods=["GET", "POST"])
 def load_home(lang="ua"):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description='ua')
     return redirect(url_for('about_us.load_about_us', lang=lang))
 
 @home.route('/uploads/<path:filename>')

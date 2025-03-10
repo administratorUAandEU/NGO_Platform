@@ -2,9 +2,8 @@
 Module for platform.
 '''
 
-from datetime import datetime
 from os import path
-from flask import Flask, url_for, render_template
+from flask import Flask, session, render_template, request
 from . import models
 
 DB_NAME = 'db.db'
@@ -25,7 +24,8 @@ def create_app():
     @app.errorhandler(500)
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template("error.html")
+        lang = error.description if error.description and error.description in ['ua', 'en'] else 'ua'
+        return render_template("error.html", lang=lang), error.code
 
     from .home import home
     from .news import news

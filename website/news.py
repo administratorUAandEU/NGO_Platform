@@ -19,7 +19,7 @@ news = Blueprint("news", __name__)
 @news.route("/<lang>/news", methods=["GET", "POST"])
 def load_news(lang):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description=lang)
 
     NewsModel = NewsEN if lang == "en" else News
     NewsTagModel = NewsTagEN if lang == "en" else NewsTag
@@ -49,7 +49,7 @@ def load_news(lang):
 @news.route("/<lang>/news/new", methods=["GET", "POST"])
 def create_news(lang):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description=lang)
 
     NewsModel = NewsEN if lang == "en" else News
     NewsTagModel = NewsTagEN if lang == "en" else NewsTag
@@ -115,12 +115,12 @@ def create_news(lang):
 @news.route("/<lang>/news/<int:news_id>", methods=["GET"])
 def view_news(lang, news_id):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description=lang)
 
     NewsModel = NewsEN if lang == "en" else News
     _news = NewsModel.query.get(news_id)
     if not _news:
-        abort(404)
+        abort(404, description=lang)
 
     image_path = _news.image_path
     news_data = {

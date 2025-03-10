@@ -15,7 +15,7 @@ def allowed_file(filename):
 @projects.route("/<lang>/projects", methods=["GET"])
 def load_projects(lang):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description=lang)
 
     ProjectModel = ProjectEN if lang == "en" else Project
     _projects = ProjectModel.query.all()
@@ -43,7 +43,7 @@ def load_projects(lang):
 @projects.route("/<lang>/projects/new", methods=["GET", "POST"])
 def create_project(lang):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description=lang)
 
     ProjectModel = ProjectEN if lang == "en" else Project
 
@@ -87,12 +87,12 @@ def create_project(lang):
 @projects.route("/<lang>/projects/<int:project_id>", methods=["GET"])
 def view_project(lang, project_id):
     if lang not in ["en", "ua"]:
-        abort(404)
+        abort(404, description=lang)
 
     ProjectModel = ProjectEN if lang == "en" else Project
     project = ProjectModel.query.get(project_id)
     if not project:
-        abort(404)
+        abort(404, description=lang)
 
     image_path = project.image_path
     project_data = {
