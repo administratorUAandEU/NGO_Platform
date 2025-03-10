@@ -3,23 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Tag</title>
+    <title>
+        {% if lang == "en" %}
+            Create Tag
+        {% else %}
+            Створити Тег
+        {% endif %}
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     {% include 'navbar.html' %}
+    
     <div class="container mt-5">
-        <h1>Create a New Tag</h1>
+        <h1>
+            {% if lang == "en" %}
+                Create a New Tag
+            {% else %}
+                Створити новий тег
+            {% endif %}
+        </h1>
         <form method="POST" action="{{ url_for('admin.add_tag', lang=lang) }}">
             <div class="mb-3">
-                <label for="name" class="form-label">Tag Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter tag name" required>
+                <label for="name" class="form-label">
+                    {% if lang == "en" %}
+                        Tag Name
+                    {% else %}
+                        Назва тегу
+                    {% endif %}
+                </label>
+                <input type="text" class="form-control" id="name" name="name" 
+                    placeholder="{% if lang == 'en' %}Enter tag name{% else %}Введіть назву тегу{% endif %}" required>
             </div>
-            <button type="submit" class="btn btn-success">Create Tag</button>
-            <a href="{{ url_for('admin.manage_tags', lang=lang) }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success">
+                {% if lang == "en" %}
+                    Create Tag
+                {% else %}
+                    Створити тег
+                {% endif %}
+            </button>
+            <a href="{{ url_for('admin.manage_tags', lang=lang) }}" class="btn btn-secondary">
+                {% if lang == "en" %}
+                    Cancel
+                {% else %}
+                    Скасувати
+                {% endif %}
+            </a>
         </form>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

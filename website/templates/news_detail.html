@@ -18,9 +18,10 @@
         {% if news.image_path %}
         <img src="{{ url_for('static', filename=news.image_path) }}" alt="{{ news.name }}" class="news-image">
         {% else %}
-            <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="{{ news.name }}" class="news-image">
+        <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="{{ news.name }}" class="news-image">
         {% endif %}
     </div>
+
     <!-- Main Content Section -->
     <div class="container main-content-container">
         <div class="news-details">
@@ -44,9 +45,13 @@
             <!-- Buttons -->
             <div class="news-buttons">
                 {% if news.link %}
-                <a href="{{ news.link }}" target="_blank" class="btn btn-outline-success">Читати більше</a>
+                <a href="{{ news.link }}" target="_blank" class="btn btn-outline-success">
+                    {% if lang == "en" %}Read more{% else %}Читати більше{% endif %}
+                </a>
                 {% endif %}
-                <a href="{{ url_for('news.load_news', lang=lang) }}" class="btn btn-outline-primary">Повернутися до новин</a>
+                <a href="{{ url_for('news.load_news', lang=lang) }}" class="btn btn-outline-primary">
+                    {% if lang == "en" %}Back to News{% else %}Повернутися до новин{% endif %}
+                </a>
             </div>
         </div>
     </div>

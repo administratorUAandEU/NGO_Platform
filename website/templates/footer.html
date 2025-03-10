@@ -3,8 +3,22 @@
         <div class="row align-items-center py-5">
             <!-- Left Column: Subtext and Contact Us -->
             <div class="col-md-4">
-                <p class="subtext">ПОЧУВ ДОСТАТНЬО? ➔</p>
-                <h1 class="main-title"><a href="mailto:newbusiness@weareimpero.com">Зв'яжись з нами</a></h1>
+                <p class="subtext">
+                    {% if lang == "en" %}
+                        HEARD ENOUGH? ➔
+                    {% else %}
+                        ПОЧУВ ДОСТАТНЬО? ➔
+                    {% endif %}
+                </p>
+                <h1 class="main-title">
+                    <a href="mailto:newbusiness@weareimpero.com">
+                        {% if lang == "en" %}
+                            Get in touch
+                        {% else %}
+                            Зв'яжись з нами
+                        {% endif %}
+                    </a>
+                </h1>
             </div>
 
             <!-- Right Column: Yellow Button -->
@@ -19,23 +33,55 @@
         <div class="row text-white py-5">
             <!-- Left Column -->
             <div class="col-md-4">
-                <h5 class="footer-title">Місце для сучасних і європейських</h5>
+                <h5 class="footer-title">
+                    {% if lang == "en" %}
+                        A place for modern and European
+                    {% else %}
+                        Місце для сучасних і європейських
+                    {% endif %}
+                </h5>
             </div>
 
             <!-- Middle Column -->
             <div class="col-md-4">
-                <h6>Львів</h6>
+                <h6>
+                    {% if lang == "en" %}
+                        Lviv
+                    {% else %}
+                        Львів
+                    {% endif %}
+                </h6>
                 <!-- Updated Email Section -->
                 <div class="footer-email">
                     <p><a href="mailto:ua.eca.ngo@gmail.com">ua.eca.ngo@gmail.com</a></p>
                 </div>
-                <p>Україна, місто Львів <br>вул. Винниченка, 6</p>
-                <p><a href="https://maps.app.goo.gl/oePUHBr2D9reyBTo9" target="_blank" class="footer-link">Локація ➔</a></p>                
+                <p>
+                    {% if lang == "en" %}
+                        Ukraine, Lviv <br>Vynnychenka St, 6
+                    {% else %}
+                        Україна, місто Львів <br>вул. Винниченка, 6
+                    {% endif %}
+                </p>
+                <p>
+                    <a href="https://maps.app.goo.gl/oePUHBr2D9reyBTo9" target="_blank" class="footer-link">
+                        {% if lang == "en" %}
+                            Location ➔
+                        {% else %}
+                            Локація ➔
+                        {% endif %}
+                    </a>
+                </p>                
             </div>
 
             <!-- Right Column -->
             <div class="col-md-4">
-                <h6>СЛІДКУЙ ТУТ</h6>
+                <h6>
+                    {% if lang == "en" %}
+                        FOLLOW US HERE
+                    {% else %}
+                        СЛІДКУЙ ТУТ
+                    {% endif %}
+                </h6>
                 <div class="social-links">
                     <!-- Facebook -->
                     <a href="https://www.facebook.com/ECAgency.UA" target="_blank" class="social-icon">
@@ -44,8 +90,7 @@
                     <!-- Instagram -->
                     <a href="https://www.instagram.com/ngo.eca?igsh=MTliOGRrcWMwZ29xdQ%3D%3D&utm_source=qr" target="_blank" class="social-icon">
                         <img src="{{ url_for('static', filename='images/instagram.png') }}" alt="Instagram">
-                    </a>
-                            
+                    </a>       
                 </div>
             </div>
         </div>

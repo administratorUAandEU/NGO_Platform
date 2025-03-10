@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Про нас | Агенція Європейського Співробітництва</title>
+    <title>{% if lang == "en" %} About Us | European Cooperation Agency {% else %} Про нас | Агенція Європейського Співробітництва {% endif %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/aboutus.css') }}">
 </head>
@@ -14,42 +14,42 @@
     <!-- Parallax Header -->
     <header class="parallax-header">
         <div class="overlay">
-            <h1>Дізнайся більше про Агенцію Європейського Співробітництва</h1>
-            <p>Місце, де народжуються ідеї та реалізуються зміни</p>
+            <h1>{% if lang == "en" %} Learn More About the European Cooperation Agency {% else %} Дізнайся більше про Агенцію Європейського Співробітництва {% endif %}</h1>
+            <p>{% if lang == "en" %} A place where ideas are born and change happens {% else %} Місце, де народжуються ідеї та реалізуються зміни {% endif %}</p>
         </div>
     </header>
 
     <!-- Info Blocks -->
     <section class="mission-section">
         <div class="container">
-            <h2 class="section-title">Про ГО «Агенція Європейського Співробітництва»</h2>
-    
+            <h2 class="section-title">{% if lang == "en" %} About the "European Cooperation Agency" {% else %} Про ГО «Агенція Європейського Співробітництва» {% endif %}</h2>
+
             <!-- Mission -->
             <div class="section-block mission">
                 <div class="content">
-                    <h3>Місія</h3>
-                    <p>Утвердити Україну як захищену демократичну країну сталого динамічного економічного розвитку, яка є членом ЄС та НАТО.</p>
-                    <p>Сприяти розвитку міцних зв'язків між громадами України та демократичними країнами-партнерами, 
-                    що підтримують вільний рух людей, товарів, послуг та інновацій.</p>
+                    <h3>{% if lang == "en" %} Mission {% else %} Місія {% endif %}</h3>
+                    <p>{% if lang == "en" %} Establish Ukraine as a protected democratic country with dynamic economic growth, as a member of the EU and NATO. {% else %} Утвердити Україну як захищену демократичну країну сталого динамічного економічного розвитку, яка є членом ЄС та НАТО. {% endif %}</p>
+                    <p>{% if lang == "en" %} Foster strong ties between Ukrainian communities and democratic partner countries, supporting the free movement of people, goods, services, and innovations. {% else %} Сприяти розвитку міцних зв'язків між громадами України та демократичними країнами-партнерами, що підтримують вільний рух людей, товарів, послуг та інновацій. {% endif %}</p>
                 </div>
             </div>
             <hr>
+
             <!-- Aim -->
             <div class="section-block aim">
                 <div class="content">
-                    <h3>Мета</h3>
-                    <p>Захист та реалізація законних прав і інтересів членів Агенції, сприяння поширенню європейських цінностей в Україні.</p>
-                    <p>Підтримка освітніх проєктів, розвиток молоді, та розширення міжнародного співробітництва через партнерство з ЄС та НАТО.</p>
+                    <h3>{% if lang == "en" %} Goal {% else %} Мета {% endif %}</h3>
+                    <p>{% if lang == "en" %} Protect and implement the legal rights and interests of the Agency's members while promoting European values in Ukraine. {% else %} Захист та реалізація законних прав і інтересів членів Агенції, сприяння поширенню європейських цінностей в Україні. {% endif %}</p>
+                    <p>{% if lang == "en" %} Support educational projects, youth development, and expand international cooperation through partnerships with the EU and NATO. {% else %} Підтримка освітніх проєктів, розвиток молоді, та розширення міжнародного співробітництва через партнерство з ЄС та НАТО. {% endif %}</p>
                 </div>
             </div>
             <hr>
+
             <!-- Vision -->
             <div class="section-block vision">
                 <div class="content">
-                    <h3>Візія</h3>
-                    <p>Громадська організація "Агенція Європейського Співробітництва" - це впливовий центр громадянського суспільства, 
-                    що об'єднує людей навколо спільних європейських цінностей та підтримує фундаментальні демократичні свободи.</p>
-                    <p>Створення потужної громадянської мережі для міжнародного співробітництва та сталого розвитку.</p>
+                    <h3>{% if lang == "en" %} Vision {% else %} Візія {% endif %}</h3>
+                    <p>{% if lang == "en" %} The "European Cooperation Agency" is an influential center of civil society that unites people around shared European values and supports fundamental democratic freedoms. {% else %} Громадська організація "Агенція Європейського Співробітництва" - це впливовий центр громадянського суспільства, що об'єднує людей навколо спільних європейських цінностей та підтримує фундаментальні демократичні свободи. {% endif %}</p>
+                    <p>{% if lang == "en" %} Creating a strong civic network for international cooperation and sustainable development. {% else %} Створення потужної громадянської мережі для міжнародного співробітництва та сталого розвитку. {% endif %}</p>
                 </div>
             </div>
         </div>
@@ -58,30 +58,30 @@
     <!-- Activities Section -->
     <section class="activities-section">
         <div class="container">
-            <h2 class="section-title text-center">Діяльність</h2>
+            <h2 class="section-title text-center">{% if lang == "en" %} Activities {% else %} Діяльність {% endif %}</h2>
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <div class="activity-card">
-                        <h4>📚 Освіта</h4>
-                        <p>Розвиток громадянського суспільства через навчальні проєкти.</p>
+                        <h4>📚 {% if lang == "en" %} Education {% else %} Освіта {% endif %}</h4>
+                        <p>{% if lang == "en" %} Developing civil society through educational projects. {% else %} Розвиток громадянського суспільства через навчальні проєкти. {% endif %}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="activity-card">
-                        <h4>🏛️ Представництво</h4>
-                        <p>Захист інтересів громадських та освітніх установ.</p>
+                        <h4>🏛️ {% if lang == "en" %} Representation {% else %} Представництво {% endif %}</h4>
+                        <p>{% if lang == "en" %} Protecting the interests of civic and educational institutions. {% else %} Захист інтересів громадських та освітніх установ. {% endif %}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="activity-card">
-                        <h4>🎓 Молодь</h4>
-                        <p>Створення можливостей для навчання та розвитку молоді.</p>
+                        <h4>🎓 {% if lang == "en" %} Youth {% else %} Молодь {% endif %}</h4>
+                        <p>{% if lang == "en" %} Creating opportunities for youth education and development. {% else %} Створення можливостей для навчання та розвитку молоді. {% endif %}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="activity-card">
-                        <h4>🌍 Інтеграція</h4>
-                        <p>Зміцнення міжнародних зв'язків з європейськими інституціями.</p>
+                        <h4>🌍 {% if lang == "en" %} Integration {% else %} Інтеграція {% endif %}</h4>
+                        <p>{% if lang == "en" %} Strengthening international relations with European institutions. {% else %} Зміцнення міжнародних зв'язків з європейськими інституціями. {% endif %}</p>
                     </div>
                 </div>
             </div>
@@ -92,9 +92,13 @@
             <div class="row align-items-center">
                 <!-- Left Side: Text Content -->
                 <div class="col-md-7 text-center text-md-start">
-                    <h1 class="fw-bold">Учасники програм</h1>
+                    <h1 class="fw-bold">    {% if lang == "en" %} Program Participants {% else %} Учасники програм {% endif %}</h1>
                     <p class="lead text-muted">
+                        {% if lang == "en" %}
+                        We are building a community based on the values of a new generation of Ukrainians who strive for a European future for Ukraine.
+                        {% else %}
                         Ми створюємо спільноту на основі цінностей нового покоління українців, які прагнуть європейського майбутнього України.
+                        {% endif %}
                     </p>
                 </div>
                 <!-- Right Side: Animated Number -->
@@ -109,7 +113,7 @@
     <!-- Gallery Section -->
     <section class="gallery">
         <div class="container">
-            <h2 class="text-center">📸 Наші події</h2>
+            <h2 class="text-center">{% if lang == "en" %}📸 Gallery{% else %}📸 Галерея{% endif %}</h2>
             <div class="gallery-grid">
                 <img src="../static/images/photo1.jpg" alt="Event 1">
                 <img src="../static/images/photo2.jpg" alt="Event 2">
@@ -120,7 +124,7 @@
     </section>
 <!-- Team Section -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Our Members</h2>
+    <h2 class="text-center mb-4">{% if lang == "en" %}Our Members{% else %}Наша команда{% endif %}</h2>
 
     <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -128,190 +132,143 @@
             <!-- Group 1: First 3 Members -->
             <div class="carousel-item active">
                 <div class="row justify-content-center">
-                    <!-- Member 1 -->
+                    {% for member in [
+                        {"name": "Оксана Юринець", "role_ua": "Президент ГО «АЄС»", "role_en": "President of NGO 'AES'", 
+                         "image": "member1.jpg", 
+                         "desc_ua": "Президент ГО «АЄС», керівник проєкту «Артерії демократії України: виклики та можливості для української молоді в контексті вступу до ЄС», професор кафедри Зовнішньоекономічної митної діяльності НУ «Львівська політехніка». Народний депутат Верховної Ради України VIII скликання, Голова підкомітету у Комітеті з питань європейської інтеграції. Голова української делегації у Парламентській асамблеї НАТО (2018-2019 рр).",
+                         "desc_en": "President of NGO 'AES', Project Manager of 'Arteries of Democracy of Ukraine: Challenges and Opportunities for Ukrainian Youth in the Context of EU Accession', Professor at the Department of Foreign Economic and Customs Activities at Lviv Polytechnic National University. Member of Parliament of Ukraine (8th convocation), Chair of the Subcommittee on European Integration, Head of the Ukrainian delegation to the NATO Parliamentary Assembly (2018-2019)."},
+                        
+                        {"name": "Лідія Лісовська", "role_ua": "Заст. керівника Грант. проєкту", "role_en": "Deputy Project Manager",
+                         "image": "member2.jpg",
+                         "desc_ua": "Професор НУ «Львівська політехніка», заступник керівника грантового проєкту.",
+                         "desc_en": "Professor at Lviv Polytechnic National University, Deputy Project Manager."},
+                         
+                        {"name": "Олена Булатова", "role_ua": "Регіональний координатор", "role_en": "Regional Coordinator",
+                         "image": "member3.jpg",
+                         "desc_ua": "Доктор економічних наук, професор (КНУ імені Тараса Шевченка), виконавець міжнародних проєктів: «Лідери трансформації університетів задля відродження України» (Британська Рада в Україні, 2023-2024), «Зміцнення переміщених українських університетів задля сталого розвитку» (Фулбрайт, 2019-2022), «Переосмислення переміщених університетів» (ЄС, 2022), «Mariupol-Pittsburgh Connections» (USAID, 2019).",
+                         "desc_en": "Doctor of Economics, Professor (Taras Shevchenko National University of Kyiv), participant in international projects: 'University Leaders Transforming for Ukraine’s Revival' (British Council in Ukraine, 2023-2024), 'Strengthening Displaced Ukrainian Universities for Sustainable Development' (Fulbright, 2019-2022), 'Rethinking Displaced Universities' (EU, 2022), 'Mariupol-Pittsburgh Connections' (USAID, 2019)."}
+                    ] %}
                     <div class="col-md-4">
                         <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member1.jpg') }}" alt="Оксана Юринець" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Оксана Юринець</h4>
-                            <p class="role">Президент ГО «АЄС»</p>
+                            <img src="{{ url_for('static', filename='images/' + member.image) }}" alt="{{ member.name }}" class="img-fluid rounded-circle">
+                            <h4 class="mt-3">{{ member.name }}</h4>
+                            <p class="role">{% if lang == "en" %} {{ member.role_en }} {% else %} {{ member.role_ua }} {% endif %}</p>
                             <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
+                                {% if lang == "en" %} Read More {% else %} Детальніше {% endif %} <span class="arrow-icon">▼</span>
                             </button>
                             <div class="member-description d-none">
-                                <p>Президент ГО «АЄС», керівник проєкту «Артерії демократії  України: виклики та можливості для української молоді в контексті вступу до ЄС», професор кафедри Зовнішньоекономічної митної діяльності НУ «Львівська політехніка». Народний депутат Верховної ради України VIII скликання, Голова підкомітету у Комітеті з питань європейської інтеграції. Голова української делегації у Парламентській асамблеї НАТО (2018-2019 рр)</p>
+                                <p>{% if lang == "en" %} {{ member.desc_en }} {% else %} {{ member.desc_ua }} {% endif %}</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Member 2 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member2.jpg') }}" alt="Лідія Лісовська" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Лідія Лісовська</h4>
-                            <p class="role">Заст. керівника Грант. проєкту</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>професор НУ «Львівська політехніка», заступник керівника Грантового проєкту.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Member 3 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member3.jpg') }}" alt="Олена Булатова" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Олена Булатова </h4>
-                            <p class="role">Регіональний координатор</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>доктор економічних наук, професор (КНУ імені Тараса Шевченка), виконавець міжнародних проєктів  «Лідери трансформації університетів задля відродження України» (Британська Рада в Україні),  2023-2024рр.;  «Зміцнення переміщених українських університетів задля сталого розвитку» (Програма імені Фулбрайта в Україні), 2019-2022 рр..;  «Переосмислення переміщених університетів: підвищення конкурентоспроможності, служіння громадам» (ЄС ),2022р.; «Mariupol-Pittsburgh Connections» у США (USAID),2019р. та ін. Експерт з оцінки проектів і стратегій розвитку «Маріуполь: Стратегія 2030»,  «Маріуполь: Стратегія розвитку - 2021», Програма антикризових заходів у м. Маріуполі, Програма диверсифікації економіки міста тощо); експерт проекту «Відновлення врядування та примирення в охоплених конфліктом громадах України» Програми розвитку ООН в Україні.</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- Group 2: Next 3 Members -->
             <div class="carousel-item">
                 <div class="row justify-content-center">
-                    <!-- Member 4 -->
+                    {% for member in [
+                        {"name": "Христина Марія", "role_ua": "Комунікаційний менеджер", "role_en": "Communication Manager",
+                         "image": "member4.jpg", 
+                         "desc_ua": "Керує комунікаційною стратегією ГО та відповідає за партнерські зв’язки.",
+                         "desc_en": "Manages the NGO's communication strategy and oversees partnerships."},
+                         
+                        {"name": "Ольга Мельник", "role_ua": "Регіональний координатор", "role_en": "Regional Coordinator",
+                         "image": "member5.jpg",
+                         "desc_ua": "Доктор економічних наук, професор кафедри зовнішньоекономічної та митної діяльності НУ «Львівська політехніка».",
+                         "desc_en": "Doctor of Economics, Professor at the Department of Foreign Economic and Customs Activities at Lviv Polytechnic National University."},
+                         
+                        {"name": "Залізна Любов", "role_ua": "Регіональний координатор", "role_en": "Regional Coordinator",
+                         "image": "member6.jpg",
+                         "desc_ua": "Старший викладач кафедри зовнішньоекономічної та митної діяльності, помічник директора Інституту економіки та менеджменту.",
+                         "desc_en": "Senior Lecturer at the Department of Foreign Economic and Customs Activities, Assistant Director of the Institute of Economics and Management."}
+                    ] %}
                     <div class="col-md-4">
                         <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member4.jpg') }}" alt="Христина Марія" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Христина Марія</h4>
-                            <p class="role">комунікаційний менеджер</p>
+                            <img src="{{ url_for('static', filename='images/' + member.image) }}" alt="{{ member.name }}" class="img-fluid rounded-circle">
+                            <h4 class="mt-3">{{ member.name }}</h4>
+                            <p class="role">{% if lang == "en" %} {{ member.role_en }} {% else %} {{ member.role_ua }} {% endif %}</p>
                             <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
+                                {% if lang == "en" %} Read More {% else %} Детальніше {% endif %} <span class="arrow-icon">▼</span>
                             </button>
                             <div class="member-description d-none">
-                                <p>Доктор економічних наук, професор, завідувач кафедри управління...</p>
+                                <p>{% if lang == "en" %} {{ member.desc_en }} {% else %} {{ member.desc_ua }} {% endif %}</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Member 5 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member5.jpg') }}" alt="Ольга Мельник" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Ольга Мельник</h4>
-                            <p class="role">Регіональний координатор</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>Доктор економічних наук, професор Національного університету «Львівська політехніка», завідувачка кафедри зовнішньоекономічної та митної діяльності.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Member 6 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member6.jpg') }}" alt="Залізна Любов" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Залізна Любов</h4>
-                            <p class="role"> Регіональний координатор</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>Старший викладач кафедри зовнішньоекономічної та митної діяльності, помічник директора Навчально-наукового інституту економіки і менеджменту</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- Group 3: Next 3 Members -->
             <div class="carousel-item">
                 <div class="row justify-content-center">
-                    <!-- Member 7 -->
+                    {% for member in [
+                        {"name": "Оксана Гадзецька", "role_ua": "Генератор створення садочків", "role_en": "Kindergarten Creator",
+                        "image": "member7.jpg", 
+                        "desc_ua": "Генератор створення садочків, один із засновників. Генератор крутих ідей, гарного настрою, та успішної побудови спілкування з дітьми.",
+                        "desc_en": "Kindergarten creator, one of the founders. A generator of great ideas, good mood, and successful interaction with children."},
+
+                        {"name": "Сірко Ярема", "role_ua": "Фінансовий експерт", "role_en": "Financial Expert",
+                        "image": "member8.jpg",
+                        "desc_ua": "Фінансовий експерт, спеціалізується на громадських та міжнародних проєктах. Має досвід у фінансовому аналізі, управлінні бюджетами та грантовому фінансуванні. Працює над стратегіями фінансової стійкості та розвитку ГО.",
+                        "desc_en": "Financial expert specializing in public and international projects. Experienced in financial analysis, budget management, and grant funding. Works on financial sustainability and NGO development strategies."},
+
+                        {"name": "Кушпір Соломія", "role_ua": "Проєктний асистент", "role_en": "Project Assistant",
+                        "image": "member9.jpg",
+                        "desc_ua": "Асистент у міжнародних проєктах. Займається координацією заходів, логістикою та комунікацією між партнерами. Має досвід у менеджменті проєктів та організації подій різного рівня.",
+                        "desc_en": "Assistant in international projects. Responsible for event coordination, logistics, and partner communication. Has experience in project management and organizing events at various levels."}
+                    ] %}
                     <div class="col-md-4">
                         <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member7.jpg') }}" alt="Оксана Гадзецька" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Оксана Гадзецька</h4>
-                            <p class="role">генератор створення садочків</p>
+                            <img src="{{ url_for('static', filename='images/' + member.image) }}" alt="{{ member.name }}" class="img-fluid rounded-circle">
+                            <h4 class="mt-3">{{ member.name }}</h4>
+                            <p class="role">{% if lang == "en" %} {{ member.role_en }} {% else %} {{ member.role_ua }} {% endif %}</p>
                             <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
+                                {% if lang == "en" %} Read More {% else %} Детальніше {% endif %} <span class="arrow-icon">▼</span>
                             </button>
                             <div class="member-description d-none">
-                                <p>Дгенератор створення садочків, один із засновників. Генератор крутих ідей, гарного настрою, та успішної побудови спілкування з дітьми.</p>
+                                <p>{% if lang == "en" %} {{ member.desc_en }} {% else %} {{ member.desc_ua }} {% endif %}</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Member 8 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member8.jpg') }}" alt="Сірко Ярема" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Сірко Ярема</h4>
-                            <p class="role">фінансовий експерт</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>фінансовий експерт</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Member 9 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member9.jpg') }}" alt="Кушпір Соломія" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Кушпір Соломія</h4>
-                            <p class="role"> проєктний асистент </p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>проєктний асистент </p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
+
             <!-- Group 4: Next 3 Members -->
             <div class="carousel-item">
                 <div class="row justify-content-center">
-                    <!-- Member 10 -->
+                    {% for member in [
+                        {"name": "Костів Юрій", "role_ua": "Регіональний координатор", "role_en": "Regional Coordinator",
+                        "image": "member10.jpg", 
+                        "desc_ua": "Кандидат технічних наук, доцент кафедри безпеки інформаційних технологій. Директор Інституту комп'ютерних технологій, автоматики та метрології Національного університету «Львівська політехніка». Спеціаліст з кібербезпеки та управління даними.",
+                        "desc_en": "PhD in Technical Sciences, Associate Professor of Information Security. Director of the Institute of Computer Technology, Automation, and Metrology at Lviv Polytechnic National University. Specialist in cybersecurity and data management."},
+
+                        {"name": "Рекуненко Ігор", "role_ua": "Регіональний координатор", "role_en": "Regional Coordinator",
+                        "image": "member11.jpg",
+                        "desc_ua": "Доктор економічних наук, професор, завідувач кафедри управління імені Олега Балацького Сумського державного університету. Експерт у сфері стратегічного управління та розвитку громадянського суспільства.",
+                        "desc_en": "Doctor of Economics, Professor, Head of the Department of Management named after Oleg Balatsky at Sumy State University. Expert in strategic management and civil society development."},
+
+                        {"name": "Андріан-Орест Теребух", "role_ua": "Регіональний координатор", "role_en": "Regional Coordinator",
+                        "image": "member12.jpg",
+                        "desc_ua": "Студент стоматологічного факультету Львівського національного медичного університету ім. Данила Галицького. Асистент стоматолога з досвідом в ортопедії, терапії, ортодонтії й ендодонтії. Активно займається волонтерською діяльністю, організацією заходів та має досвід роботи з сучасними технологіями та штучним інтелектом. Вільно володіє англійською мовою та прагне до професійного розвитку.",
+                        "desc_en": "Student of the Faculty of Dentistry at Danylo Halytsky Lviv National Medical University. Dental assistant with experience in prosthetics, therapy, orthodontics, and endodontics. Actively engaged in volunteer work, event organization, and has experience working with modern technologies and artificial intelligence. Fluent in English and eager for professional growth."}
+                    ] %}
                     <div class="col-md-4">
                         <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member10.jpg') }}" alt="Костів Юрій" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Костів Юрій</h4>
-                            <p class="role">Регіональний координатор</p>
+                            <img src="{{ url_for('static', filename='images/' + member.image) }}" alt="{{ member.name }}" class="img-fluid rounded-circle">
+                            <h4 class="mt-3">{{ member.name }}</h4>
+                            <p class="role">{% if lang == "en" %} {{ member.role_en }} {% else %} {{ member.role_ua }} {% endif %}</p>
                             <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
+                                {% if lang == "en" %} Read More {% else %} Детальніше {% endif %} <span class="arrow-icon">▼</span>
                             </button>
                             <div class="member-description d-none">
-                                <p>кандидат технічних наук, доцент кафедри безпеки інформаційних технологій, директор Інституту комп'ютерних технологій, автоматики та метрології Національного університету «Львівська політехніка»</p>
+                                <p>{% if lang == "en" %} {{ member.desc_en }} {% else %} {{ member.desc_ua }} {% endif %}</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Member 11 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member11.jpg') }}" alt="Рекуненко Ігор" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Рекуненко Ігор</h4>
-                            <p class="role">Регіональний координатор</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>доктор економічних наук, професор, завідувач кафедри управління імені Олега Балацького Сумського державного університету.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Member 12 -->
-                    <div class="col-md-4">
-                        <div class="team-member text-center">
-                            <img src="{{ url_for('static', filename='images/member12.jpg') }}" alt="Андріан-Орест Теребух" class="img-fluid rounded-circle">
-                            <h4 class="mt-3">Андріан-Орест Теребух</h4>
-                            <p class="role"> Регіональний координатор</p>
-                            <button class="show-more-btn btn btn-outline-primary">
-                                Детальніше <span class="arrow-icon">▼</span>
-                            </button>
-                            <div class="member-description d-none">
-                                <p>студент стоматологічного факультету Львівського національного медичного університету ім.Данила Галицького та асистент стоматолога з досвідом в ортопедії, терапії, ортодонтії й ендодонтії. Активно займається волонтерською діяльністю, організацією заходів і має досвід роботи з сучасними технологіями та штучним інтелектом. Вільно володіє англійською мовою та прагне до професійного розвитку.</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

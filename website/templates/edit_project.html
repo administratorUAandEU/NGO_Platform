@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Project</title>
+    <title>
+        {% if lang == "en" %}
+            Edit Project
+        {% else %}
+            Редагувати Проєкт
+        {% endif %}
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
@@ -13,37 +19,98 @@
 <body>
     {% include 'navbar.html' %}
     <div class="container mt-5">
-        <h1>Edit Project</h1>
+        <h1>
+            {% if lang == "en" %}
+                Edit Project
+            {% else %}
+                Редагувати Проєкт
+            {% endif %}
+        </h1>
         <form method="POST" action="{{ url_for('admin.edit_project', project_id=project.id, lang=lang) }}" enctype="multipart/form-data" class="mb-4">
             <div class="mb-3">
-                <label for="name" class="form-label">Project Name</label>
+                <label for="name" class="form-label">
+                    {% if lang == "en" %}
+                        Project Name
+                    {% else %}
+                        Назва Проєкту
+                    {% endif %}
+                </label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ project.name }}" required>
             </div>
             <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
+                <label for="location" class="form-label">
+                    {% if lang == "en" %}
+                        Location
+                    {% else %}
+                        Локація
+                    {% endif %}
+                </label>
                 <input type="text" class="form-control" id="location" name="location" value="{{ project.location }}" required>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
+                <label for="description" class="form-label">
+                    {% if lang == "en" %}
+                        Description
+                    {% else %}
+                        Опис
+                    {% endif %}
+                </label>
                 <textarea class="form-control" id="description" name="description" rows="3" required>{{ project.description | safe}}</textarea>
             </div>
             <div class="mb-3">
-                <label for="link" class="form-label">Link</label>
+                <label for="link" class="form-label">
+                    {% if lang == "en" %}
+                        Link
+                    {% else %}
+                        Посилання
+                    {% endif %}
+                </label>
                 <input type="url" class="form-control" id="link" name="link" value="{% if project.link %}{{ project.link }}{% endif %}">
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="finished" name="finished" {% if project.finished %}checked{% endif %}>
-                <label class="form-check-label" for="finished">Finished</label>
+                <label class="form-check-label" for="finished">
+                    {% if lang == "en" %}
+                        Finished
+                    {% else %}
+                        Завершено
+                    {% endif %}
+                </label>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image</label>
+                <label for="image" class="form-label">
+                    {% if lang == "en" %}
+                        Image
+                    {% else %}
+                        Зображення
+                    {% endif %}
+                </label>
                 <input type="file" class="form-control" id="image" name="image">
                 {% if project.image_path %}
-                <p>Current Image: <img src="{{ url_for('static', filename='uploads/' + project.image_path) }}" width="100px"></p>
+                <p>
+                    {% if lang == "en" %}
+                        Current Image:
+                    {% else %}
+                        Поточне зображення:
+                    {% endif %}
+                    <img src="{{ url_for('static', filename='uploads/' + project.image_path) }}" width="100px">
+                </p>
                 {% endif %}
             </div>
-            <button type="submit" class="btn btn-success">Save Changes</button>
-            <a href="{{ url_for('admin.manage_projects', lang=lang) }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success">
+                {% if lang == "en" %}
+                    Save Changes
+                {% else %}
+                    Зберегти Зміни
+                {% endif %}
+            </button>
+            <a href="{{ url_for('admin.manage_projects', lang=lang) }}" class="btn btn-secondary">
+                {% if lang == "en" %}
+                    Cancel
+                {% else %}
+                    Скасувати
+                {% endif %}
+            </a>
         </form>
     </div>
 

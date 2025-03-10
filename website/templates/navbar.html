@@ -16,21 +16,31 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('news.load_news', lang=lang) }}">News</a>
+                    <a class="nav-link" href="{{ url_for('news.load_news', lang=lang) }}">
+                        {% if lang == "en" %}News{% else %}Новини{% endif %}
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('projects.load_projects', lang=lang) }}">Projects</a>
+                    <a class="nav-link" href="{{ url_for('projects.load_projects', lang=lang) }}">
+                        {% if lang == "en" %}Projects{% else %}Проєкти{% endif %}
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('about_us.load_about_us', lang=lang) }}">About us</a>
+                    <a class="nav-link" href="{{ url_for('about_us.load_about_us', lang=lang) }}">
+                        {% if lang == "en" %}About us{% else %}Про нас{% endif %}
+                    </a>
                 </li>
             </ul>
 
             <!-- Search Bar -->
             <form class="d-flex search-form" method="get" action="{{ url_for('search.search_page', lang=lang) }}">
-                <input class="form-control search-input" type="search" name="query" placeholder="Search..." aria-label="Search">
+                <input class="form-control search-input" type="search" name="query" 
+                    placeholder="{% if lang == 'en' %}Search...{% else %}Пошук...{% endif %}" 
+                    aria-label="Search">
                 <button class="btn btn-search" type="submit">🔍</button>
             </form>
+
+            <!-- Language Switcher -->
             <div class="language-switcher">
                 {% set args_en = request.view_args.copy() if request.view_args else {} %}
                 {% set args_ua = request.view_args.copy() if request.view_args else {} %}
@@ -38,12 +48,17 @@
                 {% set args_en = args_en.update({'lang': 'en'}) or args_en %}
                 {% set args_ua = args_ua.update({'lang': 'ua'}) or args_ua %}
             
-                <a href="{{ url_for(request.endpoint, **args_en) }}" class="lang-link">EN</a>
+                <a href="{{ url_for(request.endpoint, **args_en) }}" 
+                   class="lang-link {% if lang == 'en' %} active-lang {% endif %}">EN</a>
+                    
                 <span class="lang-divider">|</span>
-                <a href="{{ url_for(request.endpoint, **args_ua) }}" class="lang-link">UA</a>
+                
+                <a href="{{ url_for(request.endpoint, **args_ua) }}" 
+                   class="lang-link {% if lang == 'ua' %} active-lang {% endif %}">UA</a>
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let navLinks = document.querySelectorAll(".nav-link");
@@ -67,5 +82,5 @@
                 }
             });
         });
-        </script>
+    </script>
 </nav>

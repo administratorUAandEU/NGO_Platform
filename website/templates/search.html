@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>{% if lang == "en" %}Search Results{% else %}Результати пошуку{% endif %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/search.css') }}">
@@ -15,16 +15,26 @@
 
     <div class="container mt-5">
         {% if query %}
-        <h1 class="mb-4">Search Results for "<span class="text-success">{{ query }}</span>"</h1>
+        <h1 class="mb-4">
+            {% if lang == "en" %}Search Results for{% else %}Результати пошуку для{% endif %} 
+            "<span class="text-success">{{ query }}</span>"
+        </h1>
         {% else %}
-        <h1 class="mb-4">Search Results: <span class="text-success text-uppercase">all</span></h1>
+        <h1 class="mb-4">
+            {% if lang == "en" %}Search Results:{% else %}Результати пошуку:{% endif %}
+            <span class="text-success text-uppercase">{% if lang == "en" %}All{% else %}всі{% endif %}</span>
+        </h1>
         {% endif %}
 
         {% if results.news and results.projects %}
         <nav class="mb-4 d-md-none">
             <div class="btn-group w-100" role="group" aria-label="Section navigation">
-                <a class="btn btn-outline-success" href="#news-section">Go to News</a>
-                <a class="btn btn-outline-success" href="#projects-section">Go to Projects</a>
+                <a class="btn btn-outline-success" href="#news-section">
+                    {% if lang == "en" %}Go to News{% else %}До новин{% endif %}
+                </a>
+                <a class="btn btn-outline-success" href="#projects-section">
+                    {% if lang == "en" %}Go to Projects{% else %}До проектів{% endif %}
+                </a>
             </div>
         </nav>
         {% endif %}
@@ -34,7 +44,7 @@
             <!-- News Section -->
             {% if results.news %}
             <div class="col-md-6" id="news-section">
-                <h2 class="mb-3">News</h2>
+                <h2 class="mb-3">{% if lang == "en" %}News{% else %}Новини{% endif %}</h2>
                 <div class="results-container">
                     {% for news in results.news %}
                     <div class="result-card">
@@ -52,7 +62,7 @@
         
                             <!-- Read More Button -->
                             <a href="{{ url_for('news.view_news', news_id=news.id, lang=lang) }}" class="btn btn-success btn-sm">
-                                Read More
+                                {% if lang == "en" %}Read More{% else %}Детальніше{% endif %}
                             </a>
                         </div>
                     </div>
@@ -64,7 +74,7 @@
             <!-- Projects Section -->
             {% if results.projects %}
             <div class="col-md-6" id="projects-section">
-                <h2 class="mb-3">Projects</h2>
+                <h2 class="mb-3">{% if lang == "en" %}Projects{% else %}Проекти{% endif %}</h2>
                 <div class="results-container">
                     {% for project in results.projects %}
                     <div class="result-card">
@@ -81,16 +91,16 @@
                                 {{ project.name }}
                                 <!-- ✅ Status Badge (Green = Finished, Yellow = In Progress) -->
                                 {% if project.finished %}
-                                <span class="badge bg-success">Finished</span>
+                                <span class="badge bg-success">{% if lang == "en" %}Finished{% else %}Завершено{% endif %}</span>
                                 {% else %}
-                                <span class="badge bg-warning text-dark">In Progress</span>
+                                <span class="badge bg-warning text-dark">{% if lang == "en" %}In Progress{% else %}В процесі{% endif %}</span>
                                 {% endif %}
                             </h5>
                             <p class="text-muted">{{ project.location }}</p>
             
                             <!-- Read More Button -->
                             <a href="{{ url_for('projects.view_project', project_id=project.id, lang=lang) }}" class="btn btn-success btn-sm">
-                                Read More
+                                {% if lang == "en" %}Read More{% else %}Детальніше{% endif %}
                             </a>
                         </div>
                     </div>
@@ -102,15 +112,20 @@
         {% else %}
         <div class="no-results-container">
             <div class="no-results-card">
-                <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="No Results" class="no-results-image">
+                <img src="{{ url_for('static', filename='images/default-news.png') }}" alt="No Results" class="no-results-image">
                 <h4 class="no-results-title">
-                    No results found for <span class="query-highlight">"{{ query }}"</span>
+                    {% if lang == "en" %}No results found for{% else %}Результати не знайдені для{% endif %} 
+                    <span class="query-highlight">"{{ query }}"</span>
                 </h4>
                 <p class="no-results-text">
-                    Try searching with different keywords or explore more about us.
+                    {% if lang == "en" %}
+                        Try searching with different keywords or explore more about us.
+                    {% else %}
+                        Спробуйте пошукати інші ключові слова або дізнайтеся більше про нас.
+                    {% endif %}
                 </p>
                 <a href="{{ url_for('about_us.load_about_us', lang=lang) }}" class="btn btn-primary">
-                    Return to About Us
+                    {% if lang == "en" %}Return to About Us{% else %}Повернутися до "Про нас"{% endif %}
                 </a>
             </div>
         </div>

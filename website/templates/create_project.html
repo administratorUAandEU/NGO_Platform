@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Project</title>
+    <title>
+        {% if lang == "en" %}
+            Create Project
+        {% else %}
+            Створити Проєкт
+        {% endif %}
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -14,35 +20,88 @@
     {% include 'navbar.html' %}
 
     <div class="container mt-4">
-        <h1>Create a New Project</h1>
+        <h1>
+            {% if lang == "en" %}
+                Create a New Project
+            {% else %}
+                Створити новий проєкт
+            {% endif %}
+        </h1>
         <form action="{{ url_for('projects.create_project', lang=lang) }}" method="POST" class="mt-4" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="name" class="form-label">Project Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter project name" required>
+                <label for="name" class="form-label">
+                    {% if lang == "en" %}
+                        Project Name
+                    {% else %}
+                        Назва проєкту
+                    {% endif %}
+                </label>
+                <input type="text" class="form-control" id="name" name="name" 
+                    placeholder="{% if lang == 'en' %}Enter project name{% else %}Введіть назву проєкту{% endif %}" required>
             </div>
             <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
+                <label for="location" class="form-label">
+                    {% if lang == "en" %}
+                        Location
+                    {% else %}
+                        Локація
+                    {% endif %}
+                </label>
                 <input type="text" class="form-control" id="location" name="location"
-                    placeholder="Enter project location" required>
+                    placeholder="{% if lang == 'en' %}Enter project location{% else %}Введіть місце проєкту{% endif %}" required>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter project description"></textarea>
+                <label for="description" class="form-label">
+                    {% if lang == "en" %}
+                        Description
+                    {% else %}
+                        Опис
+                    {% endif %}
+                </label>
+                <textarea class="form-control" id="description" name="description" rows="4"
+                    placeholder="{% if lang == 'en' %}Enter project description{% else %}Введіть опис проєкту{% endif %}">
+                </textarea>
             </div>
             <div class="mb-3">
-                <label for="link" class="form-label">Link (optional)</label>
+                <label for="link" class="form-label">
+                    {% if lang == "en" %}
+                        Link (optional)
+                    {% else %}
+                        Посилання (необов’язково)
+                    {% endif %}
+                </label>
                 <input type="url" class="form-control" id="link" name="link"
-                    placeholder="Enter project link (e.g., https://example.com)">
+                    placeholder="{% if lang == 'en' %}Enter project link (e.g., https://example.com){% else %}Введіть посилання на проєкт (наприклад, https://example.com){% endif %}">
             </div>
             <div class="mb-3">
-                <label for="images" class="form-label">Image</label>
+                <label for="image" class="form-label">
+                    {% if lang == "en" %}
+                        Image
+                    {% else %}
+                        Зображення
+                    {% endif %}
+                </label>
                 <input type="file" class="form-control" id="image" name="image">
             </div>            
-            <button type="submit" class="btn btn-success mb-4">Create Project</button>
-            <a href="{{ url_for('admin.manage_projects', lang=lang) }}" class="btn btn-secondary mb-4">Cancel</a>
+            <button type="submit" class="btn btn-success mb-4">
+                {% if lang == "en" %}
+                    Create Project
+                {% else %}
+                    Створити проєкт
+                {% endif %}
+            </button>
+            <a href="{{ url_for('admin.manage_projects', lang=lang) }}" class="btn btn-secondary mb-4">
+                {% if lang == "en" %}
+                    Cancel
+                {% else %}
+                    Скасувати
+                {% endif %}
+            </a>
         </form>
     </div>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

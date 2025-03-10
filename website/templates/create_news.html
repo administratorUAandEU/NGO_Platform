@@ -4,9 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create News</title>
+    <title>
+        {% if lang == "en" %}
+            Create News
+        {% else %}
+            Створити новину
+        {% endif %}
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        crossorigin="anonymous">
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 </head>
 
@@ -14,39 +20,104 @@
     {% include 'navbar.html' %}
 
     <div class="container mt-4">
-        <h1>Create a New News Article</h1>
+        <h1>
+            {% if lang == "en" %}
+                Create a New News Article
+            {% else %}
+                Створити нову новину
+            {% endif %}
+        </h1>
         <form action="{{ url_for('news.create_news', lang=lang) }}" method="POST" enctype="multipart/form-data" class="mt-4" onsubmit="updateEditorContent()">
             <div class="mb-3">
-                <label for="name" class="form-label">News Title</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter news title" required>
+                <label for="name" class="form-label">
+                    {% if lang == "en" %}
+                        News Title
+                    {% else %}
+                        Заголовок новини
+                    {% endif %}
+                </label>
+                <input type="text" class="form-control" id="name" name="name" 
+                    placeholder="{% if lang == 'en' %}Enter news title{% else %}Введіть заголовок новини{% endif %}" required>
             </div>
             <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="Enter news location" required>
+                <label for="location" class="form-label">
+                    {% if lang == "en" %}
+                        Location
+                    {% else %}
+                        Локація
+                    {% endif %}
+                </label>
+                <input type="text" class="form-control" id="location" name="location" 
+                    placeholder="{% if lang == 'en' %}Enter news location{% else %}Введіть локацію проведення того, що в новині{% endif %}" required>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter news description"></textarea>
+                <label for="description" class="form-label">
+                    {% if lang == "en" %}
+                        Description
+                    {% else %}
+                        Опис
+                    {% endif %}
+                </label>
+                <textarea class="form-control" id="description" name="description" rows="4"
+                    placeholder="{% if lang == 'en' %}Enter news description{% else %}Введіть опис новини{% endif %}">
+                </textarea>
             </div>
             <div class="mb-3">
-                <label for="link" class="form-label">Link (optional)</label>
-                <input type="url" class="form-control" id="link" name="link" placeholder="Enter news link (e.g., https://example.com)">
+                <label for="link" class="form-label">
+                    {% if lang == "en" %}
+                        Link (optional)
+                    {% else %}
+                        Посилання (необов’язково)
+                    {% endif %}
+                </label>
+                <input type="url" class="form-control" id="link" name="link" 
+                    placeholder="{% if lang == 'en' %}Enter news link (e.g., https://example.com){% else %}Введіть посилання на новину (наприклад, https://example.com){% endif %}">
             </div>
             <div class="mb-3">
-                <label for="tags" class="form-label">Tags</label>
+                <label for="tags" class="form-label">
+                    {% if lang == "en" %}
+                        Tags
+                    {% else %}
+                        Теги
+                    {% endif %}
+                </label>
                 <select class="form-control" id="tags" name="tags" multiple>
                     {% for tag in tags %}
-                    <option value="{{ tag.name }}">{{ tag.name }}</option>
+                        <option value="{{ tag.name }}">{{ tag.name }}</option>
                     {% endfor %}
                 </select>
-                <small class="text-muted">Hold Ctrl (or Cmd on Mac) to select multiple tags.</small>
+                <small class="text-muted">
+                    {% if lang == "en" %}
+                        Hold Ctrl (or Cmd on Mac) to select multiple tags.
+                    {% else %}
+                        Утримуйте Ctrl (або Cmd на Mac), щоб вибрати кілька тегів.
+                    {% endif %}
+                </small>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Upload Image</label>
+                <label for="image" class="form-label">
+                    {% if lang == "en" %}
+                        Upload Image
+                    {% else %}
+                        Завантажити зображення
+                    {% endif %}
+                </label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
             </div>
-            <button type="submit" class="btn btn-success mb-4">Create News</button>
-            <a href="{{ url_for('admin.manage_news', lang=lang) }}" class="btn btn-secondary mb-4">Cancel</a>
+            <button type="submit" class="btn btn-success mb-4">
+                {% if lang == "en" %}
+                    Create News
+                {% else %}
+                    Створити новину
+                {% endif %}
+            </button>
+            <a href="{{ url_for('admin.manage_news', lang=lang) }}" class="btn btn-secondary mb-4">
+                {% if lang == "en" %}
+                    Cancel
+                {% else %}
+                    Скасувати
+                {% endif %}
+            </a>
         </form>
     </div>
 

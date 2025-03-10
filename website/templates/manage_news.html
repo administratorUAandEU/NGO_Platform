@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Manage News</title>
+    <title>
+        {% if lang == "en" %}
+            Admin - Manage News
+        {% else %}
+            Адмін - Управління новинами
+        {% endif %}
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/styles/manager_editor_preview.css">
@@ -18,12 +24,32 @@
             <h1 class="h3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url_for('admin.load_admin_menu', lang=lang) }}">Admin Menu</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Manage News</li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ url_for('admin.load_admin_menu', lang=lang) }}">
+                                {% if lang == "en" %}
+                                    Admin Menu
+                                {% else %}
+                                    Адмін Меню
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {% if lang == "en" %}
+                                Manage News
+                            {% else %}
+                                Управління новинами
+                            {% endif %}
+                        </li>
                     </ol>
                 </nav>
             </h1>
-            <a href="{{ url_for('news.create_news', lang=lang) }}" class="btn btn-success">Add News</a>
+            <a href="{{ url_for('news.create_news', lang=lang) }}" class="btn btn-success">
+                {% if lang == "en" %}
+                    Add News
+                {% else %}
+                    Додати новину
+                {% endif %}
+            </a>
         </div>
 
         {% if news_list %}
@@ -32,10 +58,34 @@
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Location</th>
-                        <th>Date</th>
-                        <th class="text-center">Actions</th>
+                        <th>
+                            {% if lang == "en" %}
+                                Title
+                            {% else %}
+                                Заголовок
+                            {% endif %}
+                        </th>
+                        <th>
+                            {% if lang == "en" %}
+                                Location
+                            {% else %}
+                                Локація
+                            {% endif %}
+                        </th>
+                        <th>
+                            {% if lang == "en" %}
+                                Date
+                            {% else %}
+                                Дата
+                            {% endif %}
+                        </th>
+                        <th class="text-center">
+                            {% if lang == "en" %}
+                                Actions
+                            {% else %}
+                                Дії
+                            {% endif %}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,14 +98,26 @@
                         <td class="text-center">
                             <a href="{{ url_for('admin.edit_news', news_id=news_item.id, lang=lang) }}"
                                 class="btn btn-warning btn-sm">
-                                <i class="bi bi-pencil-fill"></i> Edit
+                                <i class="bi bi-pencil-fill"></i> 
+                                {% if lang == "en" %}
+                                    Edit
+                                {% else %}
+                                    Редагувати
+                                {% endif %}
                             </a>
                             <form action="{{ url_for('admin.delete_news', news_id=news_item.id, lang=lang) }}" method="POST"
                                 class="d-inline-block">
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure you want to delete this news item?');">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                </button>
+                                {% if lang == "en" %}
+                                {% set confirm_message = "Are you sure you want to delete this news item?" %}
+                                {% else %}
+                                {% set confirm_message = "Ви впевнені, що хочете видалити цю новину?" %}
+                                {% endif %}
+                            
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('{{ confirm_message }}');">
+                                <i class="bi bi-trash-fill"></i>
+                                {% if lang == "en" %}Delete{% else %}Видалити{% endif %}
+                            </button>
                             </form>
                         </td>
                     </tr>
@@ -65,7 +127,11 @@
         </div>
         {% else %}
         <div class="alert alert-info text-center">
-            No news found. Click <a href="{{ url_for('news.create_news', lang=lang) }}" class="alert-link">here</a> to add one.
+            {% if lang == "en" %}
+                No news found. Click <a href="{{ url_for('news.create_news', lang=lang) }}" class="alert-link">here</a> to add one.
+            {% else %}
+                Новини не знайдено. Натисніть <a href="{{ url_for('news.create_news', lang=lang) }}" class="alert-link">тут</a>, щоб додати.
+            {% endif %}
         </div>
         {% endif %}
     </div>
