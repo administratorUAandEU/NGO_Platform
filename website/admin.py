@@ -27,8 +27,8 @@ def load_admin_menu(lang):
         print("\nInvalid JSON format. Using default value.\n")
     return render_template('admin_menu.html', target=target, lang=lang)
 
-@admin.route("/<lang>/administrator/update_number", methods=["POST"])
-def update_number(lang):
+@admin.route("/administrator/update_number", methods=["POST"])
+def update_number():
     data = request.get_json()
     new_number = data.get("number")
 

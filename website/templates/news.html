@@ -80,7 +80,7 @@
                                 {% if article.image_exists %}
                                     <img src="{{ url_for('static', filename=article.image_path) }}" alt="Зображення новини" class="card-img-top">
                                 {% else %}
-                                    <img src="{{ url_for('static', filename='images/default-news.png') }}" alt="Default News Image" class="card-img-top">
+                                    <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="Default News Image" class="card-img-top">
                                 {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title">{{ article.name }}</h5>
