@@ -14,9 +14,9 @@ class Project(db.Model):
     __tablename__ = 'projects'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150))
-    location = db.Column(db.String(150))
-    description = db.Column(db.String)
+    name = db.Column(db.String(150), nullable=False)
+    location = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
     link = db.Column(db.String)
     image_path = db.Column(db.String, nullable=True)
     finished = db.Column(db.Boolean, default=False)
@@ -34,7 +34,7 @@ class News(db.Model):
     name = db.Column(db.String(150), nullable=False)
     location = db.Column(db.String(150), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    description = db.Column(db.Text(), nullable=False)
     image_path = db.Column(db.String, nullable=True)
     link = db.Column(db.String, nullable=True)
 
@@ -69,9 +69,9 @@ class ProjectEN(db.Model):
     __tablename__ = 'projects_en'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150))
-    location = db.Column(db.String(150))
-    description = db.Column(db.String)
+    name = db.Column(db.String(150), nullable=False)
+    location = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
     link = db.Column(db.String)
     image_path = db.Column(db.String, nullable=True)
     finished = db.Column(db.Boolean, default=False)
@@ -89,7 +89,7 @@ class NewsEN(db.Model):
     name = db.Column(db.String(150), nullable=False)
     location = db.Column(db.String(150), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    description = db.Column(db.Text(), nullable=False)
     image_path = db.Column(db.String, nullable=True)
     link = db.Column(db.String, nullable=True)
 

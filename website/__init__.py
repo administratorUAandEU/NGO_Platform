@@ -4,6 +4,7 @@ Module for platform.
 
 from os import path
 from flask import Flask, session, render_template, request
+from flask_migrate import Migrate
 from . import models
 
 DB_NAME = 'db.db'
@@ -14,11 +15,13 @@ def create_app():
     '''
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '1234567890'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://yarts:1234@localhost:5432/db'
     app.config['UPLOAD_FOLDER'] = 'website/static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
     models.db.init_app(app)
+    migrate = Migrate(app, models.db)
 
     #error
     @app.errorhandler(500)
@@ -50,8 +53,8 @@ def create_database(app):
     '''
     Create a db with basic hashtags.
     '''
-    if not path.exists('instance/' + DB_NAME):
-        models.db.create_all()
+    models.db.create_all()
+    if not models.NewsTag.query.first():
         NewsTagModel = models.NewsTagEN
         t1 = NewsTagModel(
             name = 'News'
