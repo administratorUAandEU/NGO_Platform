@@ -16,7 +16,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '1234567890'
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://yarts:1234@localhost:5432/db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ngo_platform_user:iiW9ZSNAFhdxdtUBJSRRcPYUk5IovfJZ@dpg-cvfuoqtsvqrc73d4o2f0-a.frankfurt-postgres.render.com/ngo_platform'
     app.config['UPLOAD_FOLDER'] = 'website/static/uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
