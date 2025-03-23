@@ -1,4 +1,4 @@
-import os
+import cloudinary
 from flask import Blueprint, render_template, request, flash, abort, redirect, url_for
 from .models import db, News, NewsEN, NewsTag, NewsTagEN
 from sqlalchemy.exc import IntegrityError
@@ -29,8 +29,7 @@ def load_news(lang):
     news_data = []
 
     for article in news_articles:
-        image_filename = article.image_path
-        image_path = os.path.join("website", "static", "uploads", image_filename) if image_filename else 'NaN'
+        image_path = article.image_path
         news_data.append({
             "id": article.id,
             "name": article.name,
@@ -38,8 +37,8 @@ def load_news(lang):
             "date": article.date,
             "description": article.description,
             "link": article.link,
-            "image_exists": os.path.exists(image_path),
-            "image_path": f"uploads/{image_filename}" if os.path.exists(image_path) else None,
+            "image_exists": bool(image_path),
+            "image_path": image_path,
             "tags": [tag.name for tag in article.tags]
         })
 
@@ -87,18 +86,15 @@ def create_news(lang):
         try:
             db.session.commit()
 
-            image_path = None
             if 'image' in request.files:
                 image = request.files['image']
                 if image and allowed_file(image.filename):
-                    file_extension = image.filename.rsplit('.', 1)[1].lower()
-                    filename = secure_filename(
-                        f"n{new_news.id}.{file_extension}")
-                    image_path = os.path.join(
-                        'website', 'static', 'uploads', filename)
-                    image.save(image_path)
+                    filename = secure_filename(f"n{new_news.id}")
 
-                    new_news.image_path = f"{filename}"
+                    upload_result = cloudinary.uploader.upload(image, public_id=filename)
+                    image_url = upload_result['secure_url']
+
+                    new_news.image_path = image_url
                     db.session.commit()
 
             flash("News article created successfully!", category="success")
@@ -130,8 +126,8 @@ def view_news(lang, news_id):
         "date": _news.date,
         "description": _news.description,
         "link": _news.link,
-        "image_exists": os.path.exists(os.path.join(UPLOAD_FOLDER, image_path)) if image_path else False,
-        "image_path": f"uploads/{image_path}" if image_path else None,
+        "image_exists": bool(image_path),
+        "image_path": image_path,
         "tags": _news.tags
     }
 

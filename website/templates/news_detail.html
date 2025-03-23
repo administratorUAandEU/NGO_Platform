@@ -16,7 +16,7 @@
     <!-- Parallax Image Section -->
     <div class="news-image-container">
         {% if news.image_path %}
-        <img src="{{ url_for('static', filename=news.image_path) }}" alt="{{ news.name }}" class="news-image">
+        <img src="{{ news.image_path }}" alt="{{ news.name }}" class="news-image">
         {% else %}
         <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="{{ news.name }}" class="news-image">
         {% endif %}

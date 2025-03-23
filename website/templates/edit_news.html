@@ -106,7 +106,7 @@
                     {% else %}
                         Поточне зображення:
                     {% endif %}
-                    <img src="{{ url_for('static', filename='uploads/' + news.image_path) }}" width="100px">
+                    <img src="{{ news.image_path }}" width="100px">
                 </p>
                 {% endif %}
             </div>

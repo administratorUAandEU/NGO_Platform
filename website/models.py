@@ -6,6 +6,19 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+class Config(db.Model):
+    '''
+    Configuration data for target and duration.
+    '''
+    __tablename__ = 'config'
+
+    id = db.Column(db.Integer, primary_key=True)
+    target = db.Column(db.Integer, nullable=False, default=1000)
+    duration = db.Column(db.Integer, nullable=False, default=3000)
+
+    def __repr__(self):
+        return f"<Config target={self.target} duration={self.duration}>"
+
 # UA
 class Project(db.Model):
     '''

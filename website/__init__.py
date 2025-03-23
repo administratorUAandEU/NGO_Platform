@@ -9,6 +9,16 @@ from . import models
 
 DB_NAME = 'db.db'
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+    cloud_name="daqwz5qv0",
+    api_key="363245513639795",
+    api_secret="qzNaB6D6q6FKJqk67xKUUGw2JxI"
+)
+
 def create_app():
     '''
     Flask Web App

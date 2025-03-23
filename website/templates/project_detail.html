@@ -16,7 +16,7 @@
     <!-- Parallax Image Section -->
     <div class="project-image-container">
         {% if project.image_path %}
-            <img src="{{ url_for('static', filename=project.image_path) }}" alt="{{ project.name }}" class="project-image">
+            <img src="{{ project.image_path }}" alt="{{ project.name }}" class="project-image">
         {% else %}
             <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="Default Project Image" class="project-image">
         {% endif %}

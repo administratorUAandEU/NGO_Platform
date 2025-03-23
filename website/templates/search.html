@@ -50,7 +50,7 @@
                     <div class="result-card">
                         <!-- News Image -->
                         {% if news.image_path and news.image_path != 'None' %}
-                        <img src="{{ url_for('static', filename='uploads/' + news.image_path) }}" alt="{{ news.name }}" class="result-image">
+                        <img src="{{ news.image_path }}" alt="{{ news.name }}" class="result-image">
                         {% else %}
                         <img src="{{ url_for('static', filename='images/default-news.png') }}" alt="Default News Image" class="result-image">
                         {% endif %}
@@ -80,7 +80,7 @@
                     <div class="result-card">
                         <!-- Project Image -->
                         {% if project.image_path and project.image_path != 'None' %}
-                        <img src="{{ url_for('static', filename='uploads/' + project.image_path) }}" alt="{{ project.name }}" class="result-image">
+                        <img src="{{ project.image_path }}" alt="{{ project.name }}" class="result-image">
                         {% else %}
                         <img src="{{ url_for('static', filename='images/default-project.png') }}" alt="Default Project Image" class="result-image">
                         {% endif %}

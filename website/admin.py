@@ -1,12 +1,11 @@
 import os
-import json, uuid
+import cloudinary
+import uuid
+import cloudinary.uploader
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from .models import db, Project, News, NewsTag, NewsTaggingTable, ProjectEN, NewsEN, NewsTagEN, NewsTaggingTableEN
+from .models import db, Project, News, NewsTag, NewsTaggingTable, ProjectEN, NewsEN, NewsTagEN, NewsTaggingTableEN, Config
 
 admin = Blueprint("admin", __name__)
-
-BASE_DIR = os.path.dirname(__file__)
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static/uploads')
 
 NUMBER_FILE_PATH = "website/static/resources/number_info.json"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -14,17 +13,11 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 @admin.route("/<lang>/administrator", methods=["GET", "POST"])
 def load_admin_menu(lang):
     try:
-        with open(NUMBER_FILE_PATH, "r", encoding='utf-8') as file:
-            data = json.load(file)
-
-        target = data.get("target", 1000)
-
-    except FileNotFoundError:
-        target = 10
-        print("\nJSON file not found. Using default value.\n")
-    except json.JSONDecodeError:
-        target = 10
-        print("\nInvalid JSON format. Using default value.\n")
+        config = Config.query.first()
+        target = config.target if config else 1000
+    except Exception as e:
+        target = 1000
+        print(f"\nError fetching config data from database: {e}. Using default value.\n")
     return render_template('admin_menu.html', target=target, lang=lang)
 
 @admin.route("/administrator/update_number", methods=["POST"])
@@ -36,15 +29,17 @@ def update_number():
         return jsonify({"error": "Number is required"}), 400
 
     try:
-        with open(NUMBER_FILE_PATH, "r") as file:
-            config = json.load(file)
+        config = Config.query.first()
 
-        config["target"] = new_number
+        if config:
+            config.target = new_number
+        else:
+            config = Config(target=new_number, duration=3000)
+            db.session.add(config)
 
-        with open(NUMBER_FILE_PATH, "w") as file:
-            json.dump(config, file)
+        db.session.commit()
 
-        return jsonify({"success": True, "new_number": new_number}), 200
+        return jsonify({"success": True, "new_number": config.target}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -66,13 +61,12 @@ def delete_project(lang, project_id):
         flash("Project not found.", category="error")
         return redirect(url_for("admin.manage_projects", lang=lang))
 
-    path = os.path.join(UPLOAD_FOLDER, project.image_path) if project.image_path else None
-
-    if path and os.path.exists(path):
+    if project.image_path:
         try:
-            os.remove(path)
+            public_id = project.image_path.split("/")[-1].split(".")[0]
+            cloudinary.uploader.destroy(public_id)
         except Exception as e:
-            flash(f"Failed to delete project image: {e}", category="error")
+            flash(f"Failed to delete project image from Cloudinary: {e}", category="error")
 
     db.session.delete(project)
     db.session.commit()
@@ -99,11 +93,13 @@ def edit_project(lang, project_id):
         image_file = request.files.get("image")
         if image_file:
             if project.image_path:
-                delete_file_from_uploads(project.image_path)
+                public_id = project.image_path.split("/")[-1].split(".")[0]
+                cloudinary.uploader.destroy(public_id)
 
-            image_path = os.path.join(UPLOAD_FOLDER, name := f"p{lang}{project.id}{get_file_extension(image_file)}")
-            image_file.save(image_path)
-            project.image_path = name
+            new_public_id = f"p{lang}{project.id}"
+            upload_result = cloudinary.uploader.upload(image_file, public_id=new_public_id)
+
+            project.image_path = upload_result['secure_url']
 
         db.session.commit()
         flash("Project updated successfully.", category="success")
@@ -130,20 +126,18 @@ def delete_news(lang, news_id):
         flash("News not found.", category="error")
         return redirect(url_for("admin.manage_news", lang=lang))
 
-    path = os.path.join(UPLOAD_FOLDER, news.image_path) if news.image_path else None
-
-    if path and os.path.exists(path):
+    if news.image_path:
         try:
-            os.remove(path)
+            public_id = news.image_path.split("/")[-1].split(".")[0]
+            cloudinary.uploader.destroy(public_id)
         except Exception as e:
-            flash(f"Failed to delete news image: {e}", category="error")
+            flash(f"Failed to delete news image from Cloudinary: {e}", category="error")
 
     NewsTaggingModel.query.filter_by(news_id=news_id).delete()
 
     db.session.delete(news)
     db.session.commit()
-    flash("News, its image, and tag associations deleted successfully.",
-          category="success")
+    flash("News, its image, and tag associations deleted successfully.", category="success")
     return redirect(url_for("admin.manage_news", lang=lang))
 
 
@@ -170,11 +164,13 @@ def edit_news(lang, news_id):
         image_file = request.files.get("image")
         if image_file:
             if news.image_path:
-                delete_file_from_uploads(news.image_path)
+                public_id = news.image_path.split("/")[-1].split(".")[0]
+                cloudinary.uploader.destroy(public_id)
 
-            image_path = os.path.join(UPLOAD_FOLDER,name := f"n{lang}{news.id}{get_file_extension(image_file)}")
-            image_file.save(image_path)
-            news.image_path = name
+            new_public_id = f"n{lang}{news.id}"
+            upload_result = cloudinary.uploader.upload(image_file, public_id=new_public_id)
+
+            news.image_path = upload_result['secure_url']
 
         db.session.commit()
         flash("News updated successfully.", category="success")
@@ -253,43 +249,26 @@ def upload_image():
         return jsonify({"error": {"message": "No selected file"}}), 400
 
     if file and allowed_file(file.filename):
-        file_extension = os.path.splitext(file.filename)[1]
-        unique_filename = f"{uuid.uuid4().hex}{file_extension}"
-        filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
-        file.save(filepath)
+        try:
+            unique_filename = str(uuid.uuid4().hex)
+            upload_result = cloudinary.uploader.upload(file, public_id=unique_filename)
+            file_url = upload_result['secure_url']
 
-        file_url = url_for("static", filename=f"uploads/{unique_filename}", _external=True)
+            return jsonify({
+                "uploaded": True,
+                "url": file_url
+            }), 200
 
-        return jsonify({
-            "uploaded": True,
-            "url": file_url
-        }), 200
+        except Exception as e:
+            return jsonify({"error": {"message": str(e)}}), 500
 
     return jsonify({"error": {"message": "Invalid file type"}}), 400
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def save_file_to_uploads(file, filename):
-    '''
-    Shortcut to save file to uploads.
-    '''
-    image_path = os.path.join(UPLOAD_FOLDER, filename)
-    file.save(image_path)
-
 def get_file_extension(file):
     '''
     Shortcut to get file extension.
     '''
     return os.path.splitext(file.filename)[1] if file else None
-
-def delete_file_from_uploads(filename):
-    '''
-    Shortcut to delete file from uploads.
-    '''
-    path = os.path.join(UPLOAD_FOLDER, filename) if filename else None
-    if path and os.path.exists(path):
-        try:
-            os.remove(path)
-        except Exception as e:
-            flash(f"Failed to delete file: {e}", category="error")
