@@ -1,4 +1,4 @@
-/* Hero Section */
+
 .hero-section {
     background: linear-gradient(to right, #002856, #0057b8);
     height: 40vh;
@@ -18,7 +18,7 @@
     font-size: 1.2rem;
 }
 
-/* Info Section */
+
 .info-section {
     padding: 40px 20px;
 }
@@ -32,31 +32,31 @@
     margin-bottom: 20px;
 }
 
-/* Activities Section */
+
 .activities-section {
     background: #f8f9fa;
     padding: 50px 20px;
 }
 
-/* Activity Card Container */
+
 .activity-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    width: 100%; /* Ensure full width */
-    max-width: 350px; /* Set a maximum width */
-    height: 160px; /* Set a fixed height for uniformity */
+    width: 100%;
+    max-width: 350px; 
+    height: 160px;
     padding: 20px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    overflow: hidden; /* Prevents content overflow */
+    overflow: hidden;
 }
 
-/* Activity Card Text */
+
 .activity-card h3 {
     font-size: 1.4rem;
     font-weight: bold;
@@ -66,29 +66,29 @@
 .activity-card p {
     font-size: 1rem;
     color: #555;
-    flex-grow: 1; /* Ensures even spacing */
+    flex-grow: 1;
 }
 
-/* Hover Effect */
+
 .activity-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .activity-card {
-        max-width: 100%; /* Full width on smaller screens */
-        height: auto; /* Allow flexible height */
+        max-width: 100%;
+        height: auto;
     }
 
     .activity-card img {
-        height: 180px; /* Adjust image size */
+        height: 180px;
     }
 }
 
 
-/* Members Section */
+
 .members-section {
     padding: 50px 20px;
 }
@@ -109,7 +109,7 @@
     object-fit: cover;
 }
 
-/* Partners Section */
+
 .partners-logos {
     display: flex;
     justify-content: center;
@@ -123,8 +123,9 @@
 }
 
 .mission-section {
-    background: linear-gradient(to bottom, #f8f9fa, white);
-    padding: 60px 20px;
+    background: linear-gradient(to bottom, rgb(255, 255, 255), #b6d7f8, rgb(255, 255, 255));
+    margin-top: 0rem;
+    margin-bottom: 0rem;
 }
 
 .section-title {
@@ -148,7 +149,7 @@
     transform: translateY(50px);
 }
 
-/* Animated Symbols */
+
 .symbol {
     font-size: 3rem;
     position: absolute;
@@ -164,7 +165,7 @@
     right: 10px;
 }
 
-/* Animations */
+
 .section-block.show {
     opacity: 1;
     transform: translateY(0);
@@ -174,7 +175,7 @@
     opacity: 1;
 }
 
-/* Gallery */
+
 .gallery {
     padding: 50px 20px;
     background: white;
@@ -187,7 +188,7 @@
     margin-bottom: 20px;
 }
 
-/* Gallery Grid */
+
 .gallery-grid {
     display: flex;
     justify-content: center;
@@ -255,7 +256,6 @@
 .overlay {
     background: rgba(0, 0, 0, 0.5);
     padding: 40px;
-    border-radius: 10px;
 }
 
 /* Content Section */
@@ -321,19 +321,17 @@
     position: relative;
 }
 
-/* The Scrolling Row */
 .partners-slider {
-    display: flex;
-    gap: 100px; /* Space between logos */
-    white-space: nowrap; /* Prevents line breaks */
-    animation: scrollLoop 30s linear infinite;
+    display: inline-flex;
+    gap: 50px; /* ❗ remove space between logos */
+    white-space: nowrap;
+    animation: scrollLoop 360s linear infinite; /* Longer duration = smoother */
 }
 
-/* Partner Logos */
 .partners-slider img {
-    width: 150px; /* Adjust size */
+    width: 150px;
     height: auto;
-    transition: transform 0.3s ease-in-out;
+    flex-shrink: 0; /* prevent shrinking */
 }
 
 /* Hover Effect (Pause Animation) */
@@ -347,7 +345,7 @@
         transform: translateX(0%);
     }
     to {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
 
@@ -487,4 +485,26 @@
 
 .carousel-control-next {
     right: -10px; /* Adjust as needed */
+}
+
+.card {
+    border-radius: 20px; /* Customize the roundness */
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Optional: slight lift on hover */
+}
+
+.equal-height-card {
+    height: 100%;
+    min-height: 120px; /* Smaller height */
+    padding: 1.2rem;     /* Less padding */
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+    font-size: 0.95rem;  /* Slightly smaller font */
+}
+
+.equal-height-card:hover {
+    transform: translateY(-4px);
 }
